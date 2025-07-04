@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class GzipInterceptor implements Interceptor {
-
     @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {

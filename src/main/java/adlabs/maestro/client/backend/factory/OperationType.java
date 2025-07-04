@@ -11,15 +11,19 @@ public enum OperationType {
     /**
      * Mainnet
      */
-    MAINNET("https://mainnet.gomaestro-api.org"),
+    MAESTRO_MAINNET("https://mainnet.gomaestro-api.org/"),
+    /**
+     * GuildNet
+     */
+    MAESTRO_GUILD("https://guild.gomaestro-api.org/"),
     /**
      * Preview
      */
-    PREVIEW("https://preview.gomaestro-api.org"),
+    MAESTRO_PREVIEW("https://preview.gomaestro-api.org/"),
     /**
      * PreProd
      */
-    PREPROD("https://preprod.gomaestro-api.org");
+    MAESTRO_PREPROD("https://preprod.gomaestro-api.org/");
 
     private final String baseUrl;
 

@@ -1,15 +1,16 @@
 package adlabs.maestro.client.backend.factory;
 
-import adlabs.maestro.client.backend.api.block.BlockService;
+import adlabs.maestro.client.backend.api.account.AccountService;
 
 /**
  * Backend Service
  */
 public interface BackendService {
 
-    /**
-     * Get Block Service
-     * @return {@link BlockService}
+   /**
+     * Get Accounts Service
+     * @return {@link AccountService}
      */
-    BlockService getBlockService();
+    AccountService getAccountsService();
+
 }

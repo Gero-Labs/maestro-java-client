@@ -1,6 +1,6 @@
 package adlabs.maestro.client.backend.factory;
 
-import rest.koios.client.backend.factory.impl.BackendServiceImpl;
+import adlabs.maestro.client.backend.factory.impl.BackendServiceImpl;
 
 /**
  * Backend Factory
@@ -12,127 +12,127 @@ public class BackendFactory {
     }
 
     /**
-     * Get Mainnet BackendService for Koios (Latest Version)
+     * Get Mainnet BackendService for maestro (Latest Version)
      *
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosMainnetService() {
-        return getKoiosMainnetService(null);
+    public static BackendService getMaestroMainnetService() {
+        return getMaestroMainnetService(null);
     }
 
     /**
-     * Get Mainnet BackendService for Koios (Latest Version)
+     * Get Mainnet BackendService for maestro (Latest Version)
      *
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosMainnetService(String apiToken) {
-        return getKoiosMainnetService(ApiVersion.VERSION_1, apiToken);
+    public static BackendService getMaestroMainnetService(String apiToken) {
+        return getMaestroMainnetService(ApiVersion.VERSION_1, apiToken);
     }
 
     /**
-     * Get Mainnet BackendService for Koios By Version
+     * Get Mainnet BackendService for maestro By Version
      *
      * @param apiVersion API Version
      * @param apiToken   Authorization Bearer JWT Token
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosMainnetService(ApiVersion apiVersion, String apiToken) {
-        return new BackendServiceImpl(OperationType.KOIOS_MAINNET, apiVersion, apiToken);
+    public static BackendService getMaestroMainnetService(ApiVersion apiVersion, String apiToken) {
+        return new BackendServiceImpl(OperationType.MAESTRO_MAINNET, apiVersion, apiToken);
     }
 
     /**
-     * Get Guild Network BackendService for Koios (Latest Version)
+     * Get Guild Network BackendService for maestro (Latest Version)
      *
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosGuildService() {
-        return getKoiosGuildService(ApiVersion.VERSION_1, null);
+    public static BackendService getMaestroGuildService() {
+        return getMaestroGuildService(ApiVersion.VERSION_1, null);
     }
 
     /**
-     * Get Guild Network BackendService for Koios (Latest Version)
+     * Get Guild Network BackendService for maestro (Latest Version)
      *
      * @param apiToken Authorization Bearer JWT Token
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosGuildService(String apiToken) {
-        return getKoiosGuildService(ApiVersion.VERSION_1, apiToken);
+    public static BackendService getMaestroGuildService(String apiToken) {
+        return getMaestroGuildService(ApiVersion.VERSION_1, apiToken);
     }
 
     /**
-     * Get Guild Network BackendService for Koios By Version
+     * Get Guild Network BackendService for maestro By Version
      *
      * @param apiVersion API Version
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosGuildService(ApiVersion apiVersion, String apiToken) {
-        return new BackendServiceImpl(OperationType.KOIOS_GUILD, apiVersion, apiToken);
+    public static BackendService getMaestroGuildService(ApiVersion apiVersion, String apiToken) {
+        return new BackendServiceImpl(OperationType.MAESTRO_GUILD, apiVersion, apiToken);
     }
 
     /**
-     * Get Preview Network BackendService for Koios (Latest Version)
+     * Get Preview Network BackendService for maestro (Latest Version)
      *
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosPreviewService() {
-        return getKoiosPreviewService(null);
+    public static BackendService getMaestroPreviewService() {
+        return getMaestroPreviewService(null);
     }
 
     /**
-     * Get Preview Network BackendService for Koios (Latest Version)
-     *
-     * @param apiToken Authorization Bearer JWT Token
-     * @return {@link BackendService}
-     */
-    public static BackendService getKoiosPreviewService(String apiToken) {
-        return getKoiosPreviewService(ApiVersion.VERSION_1, apiToken);
-    }
-
-    /**
-     * Get Preview Network BackendService for Koios By Version
-     *
-     * @param apiVersion API Version
-     * @param apiToken   Authorization Bearer JWT Token
-     * @return {@link BackendService}
-     */
-    public static BackendService getKoiosPreviewService(ApiVersion apiVersion, String apiToken) {
-        return new BackendServiceImpl(OperationType.KOIOS_PREVIEW, apiVersion, apiToken);
-    }
-
-    /**
-     * Get Preprod Network BackendService for Koios (Latest Version)
-     *
-     * @return {@link BackendService}
-     */
-    public static BackendService getKoiosPreprodService() {
-        return getKoiosPreprodService(null);
-    }
-
-    /**
-     * Get Preprod Network BackendService for Koios (Latest Version)
+     * Get Preview Network BackendService for maestro (Latest Version)
      *
      * @param apiToken Authorization Bearer JWT Token
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosPreprodService(String apiToken) {
-        return getKoiosPreprodService(ApiVersion.VERSION_1, apiToken);
+    public static BackendService getMaestroPreviewService(String apiToken) {
+        return getMaestroPreviewService(ApiVersion.VERSION_1, apiToken);
     }
 
     /**
-     * Get Preprod Network BackendService for Koios By Version
+     * Get Preview Network BackendService for maestro By Version
      *
      * @param apiVersion API Version
      * @param apiToken   Authorization Bearer JWT Token
      * @return {@link BackendService}
      */
-    public static BackendService getKoiosPreprodService(ApiVersion apiVersion, String apiToken) {
-        return new BackendServiceImpl(OperationType.KOIOS_PREPROD, apiVersion, apiToken);
+    public static BackendService getMaestroPreviewService(ApiVersion apiVersion, String apiToken) {
+        return new BackendServiceImpl(OperationType.MAESTRO_PREVIEW, apiVersion, apiToken);
     }
 
     /**
-     * Get BackendService for Koios
+     * Get Preprod Network BackendService for maestro (Latest Version)
      *
-     * @param baseUrl base URL for Koios
+     * @return {@link BackendService}
+     */
+    public static BackendService getMaestroPreprodService() {
+        return getMaestroPreprodService(null);
+    }
+
+    /**
+     * Get Preprod Network BackendService for maestro (Latest Version)
+     *
+     * @param apiToken Authorization Bearer JWT Token
+     * @return {@link BackendService}
+     */
+    public static BackendService getMaestroPreprodService(String apiToken) {
+        return getMaestroPreprodService(ApiVersion.VERSION_1, apiToken);
+    }
+
+    /**
+     * Get Preprod Network BackendService for maestro By Version
+     *
+     * @param apiVersion API Version
+     * @param apiToken   Authorization Bearer JWT Token
+     * @return {@link BackendService}
+     */
+    public static BackendService getMaestroPreprodService(ApiVersion apiVersion, String apiToken) {
+        return new BackendServiceImpl(OperationType.MAESTRO_PREPROD, apiVersion, apiToken);
+    }
+
+    /**
+     * Get BackendService for maestro
+     *
+     * @param baseUrl base URL for maestro
      * @return {@link BackendService}
      */
     public static BackendService getCustomRPCService(String baseUrl) {
@@ -140,9 +140,9 @@ public class BackendFactory {
     }
 
     /**
-     * Get BackendService for Koios
+     * Get BackendService for maestro
      *
-     * @param baseUrl  base URL for Koios
+     * @param baseUrl  base URL for maestro
      * @param apiToken Authorization Bearer JWT Token
      * @return {@link BackendService}
      */

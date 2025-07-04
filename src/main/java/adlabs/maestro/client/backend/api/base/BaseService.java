@@ -1,8 +1,5 @@
 package adlabs.maestro.client.backend.api.base;
 
-import adlabs.maestro.client.backend.api.base.exception.ApiException;
-import adlabs.maestro.client.backend.api.base.interceptor.GzipInterceptor;
-import adlabs.maestro.client.utils.Bech32Util;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -12,6 +9,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.jetbrains.annotations.NotNull;
+import adlabs.maestro.client.backend.api.base.exception.ApiException;
+import adlabs.maestro.client.backend.api.base.interceptor.GzipInterceptor;
+import adlabs.maestro.client.backend.factory.options.Options;
+import adlabs.maestro.client.utils.Bech32Util;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -19,7 +20,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -57,7 +60,7 @@ public class BaseService {
     public BaseService(String baseUrl, String apiToken) {
         this.apiToken = apiToken;
 
-        String strReadTimeoutSec = System.getenv("JAVA_LIB_READ_TIMEOUT_SEC");
+        String strReadTimeoutSec = System.getenv("MAESTRO_JAVA_LIB_READ_TIMEOUT_SEC");
         if (strReadTimeoutSec != null && !strReadTimeoutSec.isEmpty()) {
             int readTimeoutSec = Integer.parseInt(strReadTimeoutSec);
             if (readTimeoutSec >= 1) {
@@ -65,7 +68,7 @@ public class BaseService {
             }
         }
 
-        String strConnectTimeoutSec = System.getenv("JAVA_LIB_CONNECT_TIMEOUT_SEC");
+        String strConnectTimeoutSec = System.getenv("MAESTRO_JAVA_LIB_CONNECT_TIMEOUT_SEC");
         if (strConnectTimeoutSec != null && !strConnectTimeoutSec.isEmpty()) {
             int connectTimeoutSec = Integer.parseInt(strConnectTimeoutSec);
             if (connectTimeoutSec >= 1) {
@@ -73,7 +76,7 @@ public class BaseService {
             }
         }
 
-        boolean logging = Boolean.parseBoolean(System.getenv("JAVA_LIB_LOGGING"));
+        boolean logging = Boolean.parseBoolean(System.getenv("MAESTRO_JAVA_LIB_LOGGING"));
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
         okHttpClientBuilder.readTimeout(readTimeoutSec, TimeUnit.SECONDS)
                 .connectTimeout(connectTimeoutSec, TimeUnit.SECONDS);
@@ -82,7 +85,9 @@ public class BaseService {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClientBuilder.addInterceptor(interceptor).build();
         }
-        if (apiToken != null && !apiToken.isEmpty()) {
+        String apiKey = System.getenv("MAESTRO_JAVA_LIB_API_KEY");
+
+        if (apiKey != null && !apiKey.isEmpty()) {
             okHttpClientBuilder.addInterceptor(new Interceptor() {
                 @NotNull
                 @Override
@@ -90,7 +95,7 @@ public class BaseService {
                     Request original = chain.request();
 
                     Request request = original.newBuilder()
-                            .header("Authorization", "Bearer " + apiToken)
+                            .header("api-key", apiKey)
                             .method(original.method(), original.body())
                             .build();
                     return chain.proceed(request);
@@ -98,23 +103,23 @@ public class BaseService {
             });
         }
 
-        if (System.getenv("JAVA_LIB_GZIP_COMPRESSION") != null) {
-            gzipCompression = Boolean.parseBoolean(System.getenv("JAVA_LIB_GZIP_COMPRESSION"));
+        if (System.getenv("MAESTRO_JAVA_LIB_GZIP_COMPRESSION") != null) {
+            gzipCompression = Boolean.parseBoolean(System.getenv("MAESTRO_JAVA_LIB_GZIP_COMPRESSION"));
         }
         if (gzipCompression) {
             okHttpClientBuilder.addInterceptor(new GzipInterceptor());
         }
 
-        String strRetries = System.getenv("JAVA_LIB_RETRIES_COUNT");
+        String strRetries = System.getenv("MAESTRO_JAVA_LIB_RETRIES_COUNT");
         if (strRetries != null && !strRetries.isEmpty()) {
             retriesCount = Math.max(Integer.parseInt(strRetries), 1);
         }
-        String retryOnTimeoutEnv = System.getenv("JAVA_LIB_RETRY_ON_TIMEOUT");
+        String retryOnTimeoutEnv = System.getenv("MAESTRO_JAVA_LIB_RETRY_ON_TIMEOUT");
         if (retryOnTimeoutEnv != null && !Boolean.parseBoolean(retryOnTimeoutEnv)) {
             retryOnTimeout = false;
         }
 
-        String sleepTimeSecEnv = System.getenv("JAVA_LIB_RETRY_SLEEP_TIME_SEC");
+        String sleepTimeSecEnv = System.getenv("MAESTRO_JAVA_LIB_RETRY_SLEEP_TIME_SEC");
         if (sleepTimeSecEnv != null && !sleepTimeSecEnv.isEmpty()) {
             sleepTimeSec = Math.max(Integer.parseInt(sleepTimeSecEnv), 60);
         }
@@ -264,5 +269,13 @@ public class BaseService {
         if (!hex.isEmpty() && !hex.matches("^[\\da-fA-F]+$")) {
             throw new ApiException("Invalid Hexadecimal String Format");
         }
+    }
+
+    protected Map<String, String> optionsToParamMap(Options options) {
+        Map<String, String> paramsMap = Collections.emptyMap();
+        if (options != null && !options.getOptionList().isEmpty()) {
+            paramsMap = options.toMap();
+        }
+        return paramsMap;
     }
 }
