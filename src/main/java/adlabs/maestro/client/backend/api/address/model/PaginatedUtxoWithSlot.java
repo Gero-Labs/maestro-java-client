@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.api.address;
+package adlabs.maestro.client.backend.api.address.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
