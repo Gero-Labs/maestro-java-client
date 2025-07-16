@@ -1,5 +1,6 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.transaction.model;
 
+import adlabs.maestro.client.backend.models.LastUpdated;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;

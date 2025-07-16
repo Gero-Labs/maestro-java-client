@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.transaction.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

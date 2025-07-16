@@ -1,27 +1,27 @@
-package adlabs.maestro.client.backend.api.transactions.api;
+package adlabs.maestro.client.backend.api.transaction.api;
 
 import adlabs.maestro.client.backend.models.EvaluateRequest;
 import adlabs.maestro.client.backend.models.EvaluatedRedeemer;
-import adlabs.maestro.client.backend.models.PaginatedUtxoWithBytes;
+import adlabs.maestro.client.backend.api.transaction.model.PaginatedUtxoWithBytes;
 import adlabs.maestro.client.backend.api.address.model.TimestampedAddress;
-import adlabs.maestro.client.backend.models.TimestampedTransactionInfo;
+import adlabs.maestro.client.backend.api.transaction.model.TimestampedTransactionInfo;
 import adlabs.maestro.client.backend.models.TimestampedTxCbor;
 import adlabs.maestro.client.backend.models.TimestampedUtxo;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Transactions API
  *
  */
-public interface TransactionsApi {
+public interface TransactionApi {
 
     /**
      * Address by transaction output reference
@@ -66,13 +66,11 @@ public interface TransactionsApi {
      * Returns detailed information about a transaction
      *
      * @param txHash Transaction hash in hex
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
      * @return Detailed information about the specified transaction
      */
     @GET("transactions/{tx_hash}")
     Call<TimestampedTransactionInfo> txInfo(
-            @Path("tx_hash") String txHash,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @Path("tx_hash") String txHash
     );
 
     /**
@@ -81,16 +79,15 @@ public interface TransactionsApi {
      *
      * @param txHash Transaction Hash
      * @param index Output Index
-     * @param withCbor Include the CBOR encoding of the transaction output in the response
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
+     * @param options Options for pagination and number formatting (e.g., count, cursor).
+     * <p>-<b> with_cbor:</b> - Include the CBOR encoding of the transaction output in the response</p>
      * @return Get a transaction output via its output reference
      */
     @GET("transactions/{tx_hash}/outputs/{index}/txo")
     Call<TimestampedUtxo> txoByTxoRef(
             @Path("tx_hash") String txHash,
             @Path("index") Integer index,
-            @Query("with_cbor") Boolean withCbor,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -98,20 +95,17 @@ public interface TransactionsApi {
      * Returns the specified transaction outputs.
      *
      * @param requestBody List of transaction output references
-     * @param resolveDatums Try find and include the corresponding datums for datum hashes
-     * @param withCbor Include the CBOR encoding of the transaction output in the response
-     * @param allowMissing Do not return 404 if any transactions are not found
-     * @param count The max number of results per page
-     * @param cursor Pagination cursor string
+     * @param options Options for pagination and number formatting (e.g., count, cursor).
+     * <p>-<b> resolve_datums:</b> - Try find and include the corresponding datums for datum hashes</p>
+     * <p>-<b> with_cbor:</b> - Include the CBOR encoding of the transaction output in the response</p>
+     * <p>-<b> allow_missing:</b> - Do not return 404 if any transactions are not found</p>
+     * <p>-<b> count:</b> - The max number of results per page</p>
+     * <p>-<b> cursor:</b> - Pagination cursor string, use the cursor included in a page of results to fetch the next page</p>
      * @return Get transaction outputs via output references
      */
     @POST("transactions/outputs")
     Call<PaginatedUtxoWithBytes> txosByTxoRefs(
             @Body List<String> requestBody,
-            @Query("resolve_datums") Boolean resolveDatums,
-            @Query("with_cbor") Boolean withCbor,
-            @Query("allow_missing") Boolean allowMissing,
-            @Query("count") Integer count,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 }
