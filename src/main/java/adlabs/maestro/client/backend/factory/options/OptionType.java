@@ -3,7 +3,7 @@ package adlabs.maestro.client.backend.factory.options;
 /**
  * Option Type
  */
-public enum OptionType {
+public enum  OptionType {
 
     /**
      * FILTERING OPTION TYPE
@@ -33,5 +33,27 @@ public enum OptionType {
     /**
      * ORDER OPTION TYPE
      */
-    ORDER
+    ORDER,
+
+    /**
+     * CURSOR OPTION TYPE
+     * Pagination cursor (next page) string
+     */
+    CURSOR,
+
+    /**
+     * The max number of results per page
+     */
+    COUNT,
+
+    /**
+     * Objects created on or after a specific slot
+     */
+    FROM,
+
+    /**
+     * Objects created on or before a specific slot
+     */
+    TO,
+
 }

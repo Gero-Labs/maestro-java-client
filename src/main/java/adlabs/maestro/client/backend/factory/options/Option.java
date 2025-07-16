@@ -6,7 +6,7 @@ import lombok.Getter;
  * Option
  */
 @Getter
-public abstract class Option {
+public abstract class  Option {
 
     private final OptionType optionType;
 
