@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 import adlabs.maestro.client.backend.models.Holders;
 import adlabs.maestro.client.backend.models.Script;
-import adlabs.maestro.client.backend.models.TimestampedTransaction;
+import adlabs.maestro.client.backend.api.transaction.model.TimestampedTransaction;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
