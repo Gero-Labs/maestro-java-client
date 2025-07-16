@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
-import adlabs.maestro.client.backend.models.NumOrString;
 import adlabs.maestro.client.backend.models.Relay;
 
 import javax.validation.Valid;
@@ -35,7 +34,7 @@ public class PoolInfo {
    */
   @NotNull
   @Valid
-  private NumOrString activeStake;
+  private String activeStake;
 
   /**
    * Number of blocks produced by the pool.
@@ -48,7 +47,7 @@ public class PoolInfo {
    */
   @NotNull
   @Valid
-  private NumOrString fixedCost;
+  private String fixedCost;
 
   /**
    * Number of live delegators.
@@ -61,7 +60,7 @@ public class PoolInfo {
    */
   @NotNull
   @Valid
-  private NumOrString livePledge;
+  private String livePledge;
 
   /**
    * Live saturation percentage of the pool.
@@ -73,7 +72,7 @@ public class PoolInfo {
    */
   @NotNull
   @Valid
-  private NumOrString liveStake;
+  private String liveStake;
 
   /**
    * Live total stake percentage in the pool.
@@ -86,7 +85,7 @@ public class PoolInfo {
    */
   @NotNull
   @Valid
-  private NumOrString margin;
+  private String margin;
 
   /**
    * Metadata hash.
@@ -121,7 +120,7 @@ public class PoolInfo {
    */
   @NotNull
   @Valid
-  private NumOrString pledge;
+  private String pledge;
 
   /**
    * Bech32 encoded pool ID.

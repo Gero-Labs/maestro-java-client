@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
-import adlabs.maestro.client.backend.models.NumOrString;
 import adlabs.maestro.client.backend.models.Relay;
 
 import javax.validation.Valid;
@@ -37,14 +36,14 @@ public class PoolUpdate {
    */
   @NotNull
   @Valid
-  private NumOrString fixedCost;
+  private String fixedCost;
 
   /**
    * Margin of the pool.
    */
   @NotNull
   @Valid
-  private NumOrString margin;
+  private String margin;
 
   /**
    * Hex-encoded metadata hash.
@@ -72,7 +71,7 @@ public class PoolUpdate {
    */
   @NotNull
   @Valid
-  private NumOrString pledge;
+  private String pledge;
 
   /**
    * Bech32-encoded pool ID.

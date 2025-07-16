@@ -1,6 +1,5 @@
 package adlabs.maestro.client.backend.api.pool.api;
 
-
 import adlabs.maestro.client.backend.models.PaginatedDelegatorInfo;
 import adlabs.maestro.client.backend.models.PaginatedHistoricalDelegatorInfo;
 import adlabs.maestro.client.backend.api.pool.model.PaginatedPoolBlock;
@@ -12,28 +11,29 @@ import adlabs.maestro.client.backend.api.pool.model.TimestampedPoolRelays;
 import adlabs.maestro.client.backend.api.pool.model.TimestampedPoolUpdates;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
+
+import java.util.Map;
 
 /**
  * Pools API
  *
  */
-public interface PoolsApi {
+public interface PoolApi {
 
     /**
      * List registered stake pools
      * Returns a list of currently registered stake pools
      *
-     * @param count The max number of results per page
-     * @param cursor Pagination cursor string
+     * @param options Options for pagination and number formatting (e.g., count, cursor).
+     * <p>-<b> count:</b> - The max number of results per page</p>
+     * <p>-<b> cursor:</b> - Pagination cursor string, use the cursor included in a page of results to fetch the next page</p>
      * @return List of all registered stake pools (ticker can be null)
      */
     @GET("pools")
     Call<PaginatedPoolListInfo> listPools(
-            @Query("count") Integer count,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -41,19 +41,17 @@ public interface PoolsApi {
      * Return information about blocks minted by a given pool for all epochs (or just for epoch `epoch_no` if provided)
      *
      * @param poolId Pool ID in bech32 format
-     * @param epochNo Epoch number to fetch results for
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by block absolute slot)
-     * @param cursor Pagination cursor string
+     * @param options Options for pagination and number formatting (e.g., count, cursor).
+     * <p>-<b> epoch_no:</b> - Epoch number to fetch results for</p>
+     * <p>-<b> count:</b> - The max number of results per page</p>
+     * <p>-<b> order:</b> - The order in which the results are sorted (by block absolute slot)</p>
+     * <p>-<b> cursor:</b> - Pagination cursor string, use the cursor included in a page of results to fetch the next page</p>
      * @return Return information about blocks minted by a given pool for all epochs (or epoch_no if provided)
      */
     @GET("pools/{pool_id}/blocks")
     Call<PaginatedPoolBlock> poolBlocks(
             @Path("pool_id") String poolId,
-            @Query("epoch_no") Long epochNo,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -61,17 +59,15 @@ public interface PoolsApi {
      * Returns a list of delegators of the specified pool
      *
      * @param poolId Pool ID in bech32 format
-     * @param count The max number of results per page
-     * @param cursor Pagination cursor string
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
+     * @param options Options for pagination and number formatting (e.g., count, cursor).
+     * <p>-<b> count:</b> - The max number of results per page</p>
+     * <p>-<b> cursor:</b> - Pagination cursor string, use the cursor included in a page of results to fetch the next page</p>
      * @return Array of information about current delegators for a given pool
      */
     @GET("pools/{pool_id}/delegators")
     Call<PaginatedDelegatorInfo> poolDelegators(
             @Path("pool_id") String poolId,
-            @Query("count") Integer count,
-            @Query("cursor") String cursor,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -80,16 +76,16 @@ public interface PoolsApi {
      *
      * @param poolId Pool ID in bech32 format
      * @param epochNo Epoch number to fetch results for
-     * @param count The max number of results per page
-     * @param cursor Pagination cursor string
+     * @param options Options for pagination and number formatting (e.g., count, cursor).
+     * <p>-<b> count:</b> - The max number of results per page</p>
+     * <p>-<b> cursor:</b> - Pagination cursor string, use the cursor included in a page of results to fetch the next page</p>
      * @return Array of information about delegators for a given pool in a specific epoch
      */
     @GET("pools/{pool_id}/delegators/{epoch_no}")
     Call<PaginatedHistoricalDelegatorInfo> poolHistoricalDelegators(
             @Path("pool_id") String poolId,
             @Path("epoch_no") Integer epochNo,
-            @Query("count") Integer count,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -97,21 +93,17 @@ public interface PoolsApi {
      * Returns per-epoch information about the specified pool (or just for epoch `epoch_no` if provided)
      *
      * @param poolId Pool ID in bech32 format
-     * @param epochNo Epoch number to fetch results for
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by epoch number)
-     * @param cursor Pagination cursor string
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
+     * @param options Options for pagination and number formatting (e.g., count, cursor).
+     * <p>-<b> epoch_no:</b> - Epoch number to fetch results for</p>
+     * <p>-<b> count:</b> - The max number of results per page</p>
+     * <p>-<b> order:</b> - The order in which the results are sorted (by epoch number)</p>
+     * <p>-<b> cursor:</b> - Pagination cursor string, use the cursor included in a page of results to fetch the next page</p>
      * @return An array of pool history information for each epoch
      */
     @GET("pools/{pool_id}/history")
     Call<PaginatedPoolHistory> poolHistory(
             @Path("pool_id") String poolId,
-            @Query("epoch_no") Long epochNo,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("cursor") String cursor,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -119,13 +111,11 @@ public interface PoolsApi {
      * Returns current information about the specified pool
      *
      * @param poolId Pool ID in bech32 format
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
      * @return Current information regarding the specified pool
      */
     @GET("pools/{pool_id}/info")
     Call<TimestampedPoolInfo> poolInfo(
-            @Path("pool_id") String poolId,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @Path("pool_id") String poolId
     );
 
     /**
@@ -157,12 +147,10 @@ public interface PoolsApi {
      * Returns a list of updates relating to the specified pool
      *
      * @param poolId Pool ID in bech32 format
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
      * @return List of pool updates relating to the specified pool
      */
     @GET("pools/{pool_id}/updates")
     Call<TimestampedPoolUpdates> poolUpdates(
-            @Path("pool_id") String poolId,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @Path("pool_id") String poolId
     );
 }

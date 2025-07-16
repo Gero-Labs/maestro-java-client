@@ -3,7 +3,6 @@ package adlabs.maestro.client.backend.api.pool.model;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
-import adlabs.maestro.client.backend.models.NumOrString;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -22,7 +21,7 @@ public class PoolHistory {
   /**
    * Active stake in the pool for the epoch.
    */
-  private NumOrString activeStake;
+  private String activeStake;
 
   /**
    * Active stake percentage in the pool for the epoch.
@@ -39,7 +38,7 @@ public class PoolHistory {
    */
   @NotNull
   @Valid
-  private NumOrString delegRewards;
+  private String delegRewards;
 
   /**
    * Number of delegators to the pool in the epoch.
@@ -63,19 +62,19 @@ public class PoolHistory {
    */
   @NotNull
   @Valid
-  private NumOrString fixedCost;
+  private String fixedCost;
 
   /**
    * Margin percentage for the pool.
    */
-  private NumOrString margin;
+  private String margin;
 
   /**
    * Pool fees for the epoch.
    */
   @NotNull
   @Valid
-  private NumOrString poolFees;
+  private String poolFees;
 
   /**
    * Saturation percentage of the pool.
