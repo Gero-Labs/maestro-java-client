@@ -3,7 +3,6 @@ package adlabs.maestro.client.backend.api.asset.model;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
-import adlabs.maestro.client.backend.models.NumOrString;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -30,5 +29,5 @@ public class AssetHolder {
    */
   @NotNull
   @Valid
-  private NumOrString amount;
+  private String amount;
 }

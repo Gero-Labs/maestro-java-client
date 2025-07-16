@@ -24,7 +24,7 @@ public class AssetUtxo {
   /**
    * Amount of the asset in the UTxO
    */
-  private NumOrString amount;
+  private String amount;
 
   /**
    * UTxO transaction index

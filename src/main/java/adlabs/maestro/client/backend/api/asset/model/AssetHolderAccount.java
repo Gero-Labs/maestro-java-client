@@ -30,5 +30,5 @@ public class AssetHolderAccount {
    */
   @NotNull
   @Valid
-  private NumOrString amount;
+  private String amount;
 }
