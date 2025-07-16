@@ -3,7 +3,6 @@ package adlabs.maestro.client.backend.api.block.model;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
-import adlabs.maestro.client.backend.models.NumOrString;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -89,7 +88,7 @@ public class BlockInfo {
    */
   @NotNull
   @Valid
-  private List<BlockInfoProtocolVersionInner> protocolVersion;
+  private List<Integer> protocolVersion;
 
   /**
    * Number of script invocations
@@ -121,7 +120,7 @@ public class BlockInfo {
    */
   @NotNull
   @Valid
-  private NumOrString totalFees;
+  private String totalFees;
 
   /**
    * Total lovelace in outputs of transactions included in the block

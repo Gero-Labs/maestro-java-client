@@ -13,7 +13,8 @@ public enum LedgerEra {
   MARY("mary"),
   ALONZO("alonzo"),
   BABBAGE("babbage"),
-  CONWAY("conway");
+  CONWAY("conway"),
+  NOTRECOGNIZED("notrecognised");
 
   private final String value;
 
