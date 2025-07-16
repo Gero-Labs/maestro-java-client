@@ -10,7 +10,7 @@ import retrofit2.http.Path;
  * Epochs API
  *
  */
-public interface EpochsApi {
+public interface EpochApi {
 
     /**
      * Current epoch details
