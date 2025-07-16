@@ -25,7 +25,7 @@ class AccountServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        accountService = BackendFactory.getMaestroPreprodService().getAccountsService();
+        accountService = BackendFactory.getMaestroPreprodService().getAccountService();
     }
 
     @Test
