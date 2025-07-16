@@ -23,7 +23,7 @@ public class MintAsset {
    */
   @NotNull
   @Valid
-  private NumOrString amount;
+  private String amount;
 
   /**
    * Asset (represented as concatenation of hex encoded policy ID and asset name).

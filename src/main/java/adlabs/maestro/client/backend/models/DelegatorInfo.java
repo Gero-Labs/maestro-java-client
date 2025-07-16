@@ -29,7 +29,7 @@ public class DelegatorInfo {
    */
   @NotNull
   @Valid
-  private NumOrString amount;
+  private String amount;
 
   /**
    * The transaction hash of the most recent delegation.
