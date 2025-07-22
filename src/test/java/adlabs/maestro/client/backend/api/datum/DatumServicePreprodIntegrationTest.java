@@ -26,7 +26,7 @@ class DatumServicePreprodIntegrationTest {
 
     @Test
     void getDatumByHashTest() throws ApiException {
-        var datumHash = "20d17e4efe25eaa6bc92d7349abd33fc4a6866b6546db02844349bf0effaa66a";
+        var datumHash = "5571e2c3549f15934a38382d1318707a86751fb70827f4cbd29b104480f1be9b";
 
         Result<TimestampedDatum> datumByHashResult = datumService.getDatumByHash(datumHash);
         Assertions.assertTrue(datumByHashResult.isSuccessful());
@@ -36,7 +36,7 @@ class DatumServicePreprodIntegrationTest {
 
     @Test
     void getDatumsByHashesTest() throws ApiException {
-        var datumHashes = List.of("20d17e4efe25eaa6bc92d7349abd33fc4a6866b6546db02844349bf0effaa66a");
+        var datumHashes = List.of("5571e2c3549f15934a38382d1318707a86751fb70827f4cbd29b104480f1be9b");
 
         Result<TimestampedDatumMap> datumByHashResult = datumService.getDatumsByHashes(datumHashes);
         Assertions.assertTrue(datumByHashResult.isSuccessful());

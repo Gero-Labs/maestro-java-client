@@ -5,8 +5,6 @@ import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.api.pool.model.*;
 import adlabs.maestro.client.backend.factory.BackendFactory;
 import adlabs.maestro.client.backend.factory.options.Options;
-import adlabs.maestro.client.backend.models.PaginatedDelegatorInfo;
-import adlabs.maestro.client.backend.models.PaginatedHistoricalDelegatorInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
