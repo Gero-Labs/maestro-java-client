@@ -1,5 +1,6 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.script.model;
 
+import adlabs.maestro.client.backend.models.LastUpdated;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
@@ -14,10 +15,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class TimestampedScript {
+public class TimestampedScriptFirstSeen {
 
-  private Script data;
+  private ScriptFirstSeen data;
 
   private LastUpdated lastUpdated;
+
 }
 

@@ -5,8 +5,10 @@ import adlabs.maestro.client.backend.api.address.AddressesService;
 import adlabs.maestro.client.backend.api.asset.AssetService;
 import adlabs.maestro.client.backend.api.block.BlockService;
 import adlabs.maestro.client.backend.api.datum.DatumService;
+import adlabs.maestro.client.backend.api.general.GeneralService;
 import adlabs.maestro.client.backend.api.policy.PolicyService;
 import adlabs.maestro.client.backend.api.pool.PoolService;
+import adlabs.maestro.client.backend.api.script.ScriptsService;
 import adlabs.maestro.client.backend.api.transaction.TransactionService;
 
 /**
@@ -61,4 +63,16 @@ public interface BackendService {
     * @return {@link PolicyService}
     */
     PolicyService getPolicyService();
+
+    /**
+     * Get Scripts Service
+     * @return {@link ScriptsService}
+     */
+    ScriptsService getScriptsService();
+
+    /**
+     * Get General Service
+     * @return {@link GeneralService}
+     */
+    GeneralService getGeneralService();
 }

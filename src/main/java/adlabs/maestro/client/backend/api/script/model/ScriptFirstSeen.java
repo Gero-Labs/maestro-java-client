@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.script.model;
 
 import adlabs.maestro.client.backend.api.transaction.model.TimestampedTransaction;
 import com.fasterxml.jackson.databind.JsonNode;

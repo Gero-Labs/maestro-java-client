@@ -8,10 +8,14 @@ import adlabs.maestro.client.backend.api.block.BlockService;
 import adlabs.maestro.client.backend.api.block.impl.BlockServiceImpl;
 import adlabs.maestro.client.backend.api.datum.DatumService;
 import adlabs.maestro.client.backend.api.datum.impl.DatumServiceImpl;
+import adlabs.maestro.client.backend.api.general.GeneralService;
+import adlabs.maestro.client.backend.api.general.impl.GeneralServiceImpl;
 import adlabs.maestro.client.backend.api.policy.PolicyService;
 import adlabs.maestro.client.backend.api.policy.impl.PolicyServiceImpl;
 import adlabs.maestro.client.backend.api.pool.PoolService;
 import adlabs.maestro.client.backend.api.pool.impl.PoolServiceImpl;
+import adlabs.maestro.client.backend.api.script.ScriptsService;
+import adlabs.maestro.client.backend.api.script.impl.ScriptsServiceImpl;
 import adlabs.maestro.client.backend.api.transaction.TransactionService;
 import adlabs.maestro.client.backend.api.transaction.impl.TransactionServiceImpl;
 import lombok.Getter;
@@ -38,6 +42,8 @@ public class BackendServiceImpl implements BackendService {
     private final PolicyService policyService;
     private final PoolService poolService;
     private final TransactionService transactionService;
+    private final ScriptsService scriptsService;
+    private final GeneralService generalService;
 
 
     /**
@@ -64,8 +70,8 @@ public class BackendServiceImpl implements BackendService {
         this.policyService = new PolicyServiceImpl(baseUrl,apiToken);
         this.poolService = new PoolServiceImpl(baseUrl,apiToken);
         this.transactionService = new TransactionServiceImpl(baseUrl,apiToken);
-
-
+        this.scriptsService = new ScriptsServiceImpl(baseUrl, apiToken);
+        this.generalService = new GeneralServiceImpl(baseUrl, apiToken);
     }
 
     /**
