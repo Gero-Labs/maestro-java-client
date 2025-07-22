@@ -1,0 +1,37 @@
+package adlabs.maestro.client.backend.api.transaction.model;
+
+import adlabs.maestro.client.backend.models.LastUpdated;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+/**
+ * A timestamped response containing a transaction CBOR. This includes the data
+ * and the chain-tip of the indexer, indicating the point in the chain's history
+ * at which the data was current.
+ */
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class TimestampedTxCbor {
+
+  /**
+   * The transaction CBOR data as a hex-encoded string.
+   */
+  @NotNull
+  private String data;
+
+  /**
+   * The last update details, indicating the chain-tip.
+   */
+  @NotNull
+  @Valid
+  private LastUpdated lastUpdated;
+}

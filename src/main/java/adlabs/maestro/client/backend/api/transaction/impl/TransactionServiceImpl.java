@@ -4,11 +4,9 @@ import adlabs.maestro.client.backend.api.base.BaseService;
 import adlabs.maestro.client.backend.api.base.Result;
 import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.api.transaction.api.TransactionApi;
-import adlabs.maestro.client.backend.api.transaction.model.PaginatedUtxoWithBytes;
-import adlabs.maestro.client.backend.api.transaction.model.TimestampedTransactionInfo;
+import adlabs.maestro.client.backend.api.transaction.model.*;
 import adlabs.maestro.client.backend.api.transaction.TransactionService;
 import adlabs.maestro.client.backend.factory.options.Options;
-import adlabs.maestro.client.backend.models.*;
 import adlabs.maestro.client.backend.api.address.model.TimestampedAddress;
 import retrofit2.Call;
 

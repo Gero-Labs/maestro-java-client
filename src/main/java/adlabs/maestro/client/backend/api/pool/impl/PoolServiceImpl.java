@@ -7,8 +7,8 @@ import adlabs.maestro.client.backend.api.pool.api.PoolApi;
 import adlabs.maestro.client.backend.api.pool.model.*;
 import adlabs.maestro.client.backend.api.pool.PoolService;
 import adlabs.maestro.client.backend.factory.options.Options;
-import adlabs.maestro.client.backend.models.PaginatedDelegatorInfo;
-import adlabs.maestro.client.backend.models.PaginatedHistoricalDelegatorInfo;
+import adlabs.maestro.client.backend.api.pool.model.PaginatedDelegatorInfo;
+import adlabs.maestro.client.backend.api.pool.model.PaginatedHistoricalDelegatorInfo;
 import retrofit2.Call;
 
 /**

@@ -2,14 +2,9 @@ package adlabs.maestro.client.backend.api.transaction;
 
 import adlabs.maestro.client.backend.api.base.Result;
 import adlabs.maestro.client.backend.api.base.exception.ApiException;
+import adlabs.maestro.client.backend.api.transaction.model.*;
 import adlabs.maestro.client.backend.factory.options.Options;
-import adlabs.maestro.client.backend.models.EvaluateRequest;
-import adlabs.maestro.client.backend.models.EvaluatedRedeemer;
-import adlabs.maestro.client.backend.api.transaction.model.PaginatedUtxoWithBytes;
 import adlabs.maestro.client.backend.api.address.model.TimestampedAddress;
-import adlabs.maestro.client.backend.api.transaction.model.TimestampedTransactionInfo;
-import adlabs.maestro.client.backend.models.TimestampedTxCbor;
-import adlabs.maestro.client.backend.models.TimestampedUtxo;
 
 import java.util.List;
 

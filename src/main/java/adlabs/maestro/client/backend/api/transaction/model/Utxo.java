@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * Represents a transaction output (UTxO) with an optional field for the CBOR bytes.
+ * Represents a transaction output (UTxO).
  */
 @Getter
 @Setter
@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class UtxoWithBytes {
+public class Utxo {
 
   /**
    * The address which controls the UTxO.
@@ -44,11 +44,11 @@ public class UtxoWithBytes {
   private DatumOption datum;
 
   /**
-   * The UTxO transaction index.
+   * The transaction index of the UTxO.
    */
   @NotNull
-  @Min(0)
-  private Integer index;
+  @Min(0L)
+  private Long index;
 
   /**
    * The reference script, if any.
@@ -57,13 +57,8 @@ public class UtxoWithBytes {
   private Script referenceScript;
 
   /**
-   * The UTxO transaction hash.
+   * The transaction hash of the UTxO.
    */
   @NotNull
   private String txHash;
-
-  /**
-   * Hex-encoded transaction output CBOR bytes.
-   */
-  private String txoutCbor;
 }

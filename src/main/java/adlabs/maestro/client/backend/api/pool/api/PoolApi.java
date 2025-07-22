@@ -1,7 +1,7 @@
 package adlabs.maestro.client.backend.api.pool.api;
 
-import adlabs.maestro.client.backend.models.PaginatedDelegatorInfo;
-import adlabs.maestro.client.backend.models.PaginatedHistoricalDelegatorInfo;
+import adlabs.maestro.client.backend.api.pool.model.PaginatedDelegatorInfo;
+import adlabs.maestro.client.backend.api.pool.model.PaginatedHistoricalDelegatorInfo;
 import adlabs.maestro.client.backend.api.pool.model.PaginatedPoolBlock;
 import adlabs.maestro.client.backend.api.pool.model.PaginatedPoolHistory;
 import adlabs.maestro.client.backend.api.pool.model.PaginatedPoolListInfo;
