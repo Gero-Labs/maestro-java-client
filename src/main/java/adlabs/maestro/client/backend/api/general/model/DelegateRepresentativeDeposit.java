@@ -1,13 +1,14 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents the length of a slot in milliseconds.
+ * DRep action deposit (introduced in Conway).
  */
 @Getter
 @Setter
@@ -15,11 +16,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class SlotLength {
+public class DelegateRepresentativeDeposit {
 
   /**
-   * Slot length in milliseconds.
+   * ADA amount.
    */
   @NotNull
-  private Long milliseconds;
+  @Valid
+  private Ada ada;
 }

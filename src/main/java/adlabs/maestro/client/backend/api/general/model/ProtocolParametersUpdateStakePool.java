@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -7,7 +7,7 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Maximum value size.
+ * Represents a stake pool protocol parameters update (introduced in Conway).
  */
 @Getter
 @Setter
@@ -15,11 +15,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MaxValueSize {
+public class ProtocolParametersUpdateStakePool {
 
   /**
-   * Maximum value size in bytes.
+   * Security parameters.
    */
   @NotNull
-  private Long bytes;
+  private String security;
 }

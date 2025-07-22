@@ -1,13 +1,15 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
+import adlabs.maestro.client.backend.api.script.model.Time;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Parameters for reference script fee calculation (introduced in Conway).
+ * Represents the end details of an era.
  */
 @Getter
 @Setter
@@ -15,23 +17,24 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MinFeeReferenceScripts {
+public class End {
 
   /**
-   * Base value for fee calculation.
+   * Epoch number at the end.
    */
   @NotNull
-  private Double base;
+  private Long epoch;
 
   /**
-   * Multiplier value for fee calculation.
+   * Slot number at the end.
    */
   @NotNull
-  private Double multiplier;
+  private Long slot;
 
   /**
-   * Range value for fee calculation.
+   * Time at the end.
    */
   @NotNull
-  private Long range;
+  @Valid
+  private Time time;
 }

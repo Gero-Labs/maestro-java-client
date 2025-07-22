@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -7,7 +7,7 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a stake pool protocol parameters update (introduced in Conway).
+ * Represents the parameters of an era.
  */
 @Getter
 @Setter
@@ -15,11 +15,22 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ProtocolParametersUpdateStakePool {
+public class EraParameters {
 
   /**
-   * Security parameters.
+   * Length of the epoch.
    */
   @NotNull
-  private String security;
+  private Long epochLength;
+
+  /**
+   * Safe zone.
+   */
+  private Long safeZone;
+
+  /**
+   * Length of the slot.
+   */
+  @NotNull
+  private Long slotLength;
 }

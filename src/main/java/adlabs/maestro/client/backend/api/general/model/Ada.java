@@ -1,29 +1,26 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.NotNull;
 
 /**
- * Start
+ * Represents an amount in Lovelace, the smallest unit of Ada.
  */
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Start {
+public class Ada {
 
+  /**
+   * The amount in Lovelace.
+   */
   @NotNull
-  private Long epoch;
-
-  @NotNull
-  private Long slot;
-
-  @NotNull
-  @Valid
-  private Time time;
+  private Long lovelace;
 }

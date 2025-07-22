@@ -1,14 +1,13 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
- * Plutus script execution cost models.
+ * Represents a Constitutional Committee with a default value and a state of no confidence.
  */
 @Getter
 @Setter
@@ -16,22 +15,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PlutusCostModels {
+public class ConstitutionalCommittee {
 
   /**
-   * Plutus V1 cost model parameters.
+   * Default value.
    */
   @NotNull
-  private List<Long> plutusV1;
+  private String _default;
 
   /**
-   * Plutus V2 cost model parameters.
+   * State of no confidence.
    */
   @NotNull
-  private List<Long> plutusV2;
-
-  /**
-   * Plutus V3 cost model parameters.
-   */
-  private List<Long> plutusV3;
+  private String stateOfNoConfidence;
 }

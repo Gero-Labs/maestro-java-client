@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -7,7 +7,7 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Bound information for epoch, slot, and time
+ * Parameters for reference script fee calculation (introduced in Conway).
  */
 @Getter
 @Setter
@@ -15,23 +15,23 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Bound {
+public class MinFeeReferenceScripts {
 
   /**
-   * Epoch number
+   * Base value for fee calculation.
    */
   @NotNull
-  private Long epoch;
+  private Double base;
 
   /**
-   * Slot number
+   * Multiplier value for fee calculation.
    */
   @NotNull
-  private Long slot;
+  private Double multiplier;
 
   /**
-   * Time value
+   * Range value for fee calculation.
    */
   @NotNull
-  private Long time;
+  private Long range;
 }

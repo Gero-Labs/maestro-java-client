@@ -30,25 +30,25 @@ public class GeneralServiceImpl extends BaseService implements GeneralService {
     }
 
     @Override
-    public Result<TimestampedChainTip> chainTip() throws ApiException {
+    public Result<TimestampedChainTip> getChainTip() throws ApiException {
         Call<TimestampedChainTip> call = generalApi.chainTip();
         return processResponse(call);
     }
 
     @Override
-    public Result<TimestampedEraSummaries> eraSummaries() throws ApiException {
+    public Result<TimestampedEraSummaries> getEraSummaries() throws ApiException {
         Call<TimestampedEraSummaries> call = generalApi.eraSummaries();
         return processResponse(call);
     }
 
     @Override
-    public Result<TimestampedProtocolParameters> protocolParameters() throws ApiException {
+    public Result<TimestampedProtocolParameters> getProtocolParameters() throws ApiException {
         Call<TimestampedProtocolParameters> call = generalApi.protocolParameters();
         return processResponse(call);
     }
 
     @Override
-    public Result<TimestampedSystemStart> systemStart() throws ApiException {
+    public Result<TimestampedSystemStart> getSystemStart() throws ApiException {
         Call<TimestampedSystemStart> call = generalApi.systemStart();
         return processResponse(call);
     }

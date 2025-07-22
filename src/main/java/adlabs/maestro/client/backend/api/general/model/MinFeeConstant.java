@@ -1,13 +1,14 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Script execution prices.
+ * Minimum ADA fee.
  */
 @Getter
 @Setter
@@ -15,17 +16,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ScriptExecutionPrices {
+public class MinFeeConstant {
 
   /**
-   * Script execution CPU price.
+   * ADA amount.
    */
   @NotNull
-  private String cpu;
-
-  /**
-   * Script execution memory price.
-   */
-  @NotNull
-  private String memory;
+  @Valid
+  private Ada ada;
 }

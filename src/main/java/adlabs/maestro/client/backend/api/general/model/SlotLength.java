@@ -1,14 +1,13 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Minimum ADA fee.
+ * Represents the length of a slot in milliseconds.
  */
 @Getter
 @Setter
@@ -16,12 +15,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MinFeeConstant {
+public class SlotLength {
 
   /**
-   * ADA amount.
+   * Slot length in milliseconds.
    */
   @NotNull
-  @Valid
-  private Ada ada;
+  private Long milliseconds;
 }

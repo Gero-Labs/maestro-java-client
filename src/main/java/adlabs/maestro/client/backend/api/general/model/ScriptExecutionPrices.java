@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -7,20 +7,25 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents an amount in Lovelace, the smallest unit of Ada.
+ * Script execution prices.
  */
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Ada {
+public class ScriptExecutionPrices {
 
   /**
-   * The amount in Lovelace.
+   * Script execution CPU price.
    */
   @NotNull
-  private Long lovelace;
+  private String cpu;
+
+  /**
+   * Script execution memory price.
+   */
+  @NotNull
+  private String memory;
 }

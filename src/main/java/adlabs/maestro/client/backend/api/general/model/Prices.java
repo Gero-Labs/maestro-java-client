@@ -1,14 +1,13 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Minimum UTxO deposit amount.
+ * Represents prices for memory and steps.
  */
 @Getter
 @Setter
@@ -16,12 +15,17 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MinUtxoDepositConstant {
+public class Prices {
 
   /**
-   * ADA amount for minimum UTxO deposit.
+   * Price per memory unit.
    */
   @NotNull
-  @Valid
-  private Ada ada;
+  private String memory;
+
+  /**
+   * Price per step unit.
+   */
+  @NotNull
+  private String steps;
 }

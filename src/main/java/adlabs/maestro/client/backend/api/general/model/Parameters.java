@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * DRep action deposit (introduced in Conway).
+ * Represents parameters for an era.
  */
 @Getter
 @Setter
@@ -16,12 +16,24 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class DelegateRepresentativeDeposit {
+public class Parameters {
 
   /**
-   * ADA amount.
+   * Length of the epoch.
+   */
+  @NotNull
+  private Long epochLength;
+
+  /**
+   * Safe zone.
+   */
+  @NotNull
+  private Long safeZone;
+
+  /**
+   * Length of the slot.
    */
   @NotNull
   @Valid
-  private Ada ada;
+  private SlotLength slotLength;
 }

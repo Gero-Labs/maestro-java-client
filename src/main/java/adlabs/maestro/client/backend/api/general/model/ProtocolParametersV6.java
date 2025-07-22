@@ -1,5 +1,6 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
+import adlabs.maestro.client.backend.models.Version;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
@@ -183,8 +184,8 @@ public class ProtocolParametersV6 {
    * Stake pool deposit.
    */
   @NotNull
-  @Min(0L)
-  private Long stakePoolDeposit;
+  @Valid
+  private StakeDeposit stakePoolDeposit;
 
   /**
    * Stake pool pledge influence.

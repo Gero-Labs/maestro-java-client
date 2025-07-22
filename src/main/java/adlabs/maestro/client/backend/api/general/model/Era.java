@@ -1,13 +1,14 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents the parameters of an era.
+ * Represents an era with start, end, and parameters.
  */
 @Getter
 @Setter
@@ -15,22 +16,26 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class EraParameters {
+public class Era {
 
   /**
-   * Length of the epoch.
+   * End details of the era.
    */
   @NotNull
-  private Long epochLength;
+  @Valid
+  private End end;
 
   /**
-   * Safe zone.
-   */
-  private Long safeZone;
-
-  /**
-   * Length of the slot.
+   * Parameters of the era.
    */
   @NotNull
-  private Long slotLength;
+  @Valid
+  private Parameters parameters;
+
+  /**
+   * Start details of the era.
+   */
+  @NotNull
+  @Valid
+  private Start start;
 }

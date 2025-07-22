@@ -18,7 +18,7 @@ public interface GeneralService {
      * @return Details of the chain-tip (latest block)
      * @throws ApiException if an error occurs during API call
      */
-    Result<TimestampedChainTip> chainTip() throws ApiException;
+    Result<TimestampedChainTip> getChainTip() throws ApiException;
 
     /**
      * Returns the blockchain era summaries. May include a future Era before hard forks.
@@ -27,7 +27,7 @@ public interface GeneralService {
      * @return Era summaries
      * @throws ApiException if an error occurs during API call
      */
-    Result<TimestampedEraSummaries> eraSummaries() throws ApiException;
+    Result<TimestampedEraSummaries> getEraSummaries() throws ApiException;
 
     /**
      * Returns the current blockchain protocol parameters.
@@ -35,7 +35,7 @@ public interface GeneralService {
      * @return Protocol params
      * @throws ApiException if an error occurs during API call
      */
-    Result<TimestampedProtocolParameters> protocolParameters() throws ApiException;
+    Result<TimestampedProtocolParameters> getProtocolParameters() throws ApiException;
 
     /**
      * Returns the blockchain system start time.
@@ -43,5 +43,5 @@ public interface GeneralService {
      * @return System start time
      * @throws ApiException if an error occurs during API call
      */
-    Result<TimestampedSystemStart> systemStart() throws ApiException;
+    Result<TimestampedSystemStart> getSystemStart() throws ApiException;
 }

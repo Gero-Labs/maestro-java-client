@@ -1,14 +1,13 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Minimum stake pool cost.
+ * Bound information for epoch, slot, and time
  */
 @Getter
 @Setter
@@ -16,12 +15,23 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MinStakePoolCost {
+public class Bound {
 
   /**
-   * ADA amount for minimum stake pool cost.
+   * Epoch number
    */
   @NotNull
-  @Valid
-  private Ada ada;
+  private Long epoch;
+
+  /**
+   * Slot number
+   */
+  @NotNull
+  private Long slot;
+
+  /**
+   * Time value
+   */
+  @NotNull
+  private Long time;
 }

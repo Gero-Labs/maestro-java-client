@@ -1,14 +1,14 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
- * Represents an era with start, end, and parameters.
+ * Plutus script execution cost models.
  */
 @Getter
 @Setter
@@ -16,26 +16,22 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Era {
+public class PlutusCostModels {
 
   /**
-   * End details of the era.
+   * Plutus V1 cost model parameters.
    */
   @NotNull
-  @Valid
-  private End end;
+  private List<Long> plutusV1;
 
   /**
-   * Parameters of the era.
+   * Plutus V2 cost model parameters.
    */
   @NotNull
-  @Valid
-  private Parameters parameters;
+  private List<Long> plutusV2;
 
   /**
-   * Start details of the era.
+   * Plutus V3 cost model parameters.
    */
-  @NotNull
-  @Valid
-  private Start start;
+  private List<Long> plutusV3;
 }

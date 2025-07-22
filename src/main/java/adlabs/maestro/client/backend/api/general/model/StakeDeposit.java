@@ -1,13 +1,14 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a Constitutional Committee with a default value and a state of no confidence.
+ * Stake deposit amount.
  */
 @Getter
 @Setter
@@ -15,17 +16,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ConstitutionalCommittee {
+public class StakeDeposit {
 
   /**
-   * Default value.
+   * ADA amount for the stake deposit.
    */
   @NotNull
-  private String _default;
-
-  /**
-   * State of no confidence.
-   */
-  @NotNull
-  private String stateOfNoConfidence;
+  @Valid
+  private Ada ada;
 }

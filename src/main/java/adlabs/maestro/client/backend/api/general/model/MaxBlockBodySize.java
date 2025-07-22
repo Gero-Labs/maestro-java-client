@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -7,7 +7,7 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents prices for memory and steps.
+ * Maximum number of bytes allowed for a block body.
  */
 @Getter
 @Setter
@@ -15,17 +15,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Prices {
+public class MaxBlockBodySize {
 
   /**
-   * Price per memory unit.
+   * Maximum number of bytes allowed for a block body.
    */
   @NotNull
-  private String memory;
-
-  /**
-   * Price per step unit.
-   */
-  @NotNull
-  private String steps;
+  private Long bytes;
 }

@@ -1,13 +1,14 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.general.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Maximum execution units.
+ * Governance action deposit (introduced in Conway).
  */
 @Getter
 @Setter
@@ -15,17 +16,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MaxExecutionUnits {
+public class GovernanceActionDeposit {
 
   /**
-   * Maximum execution CPU units.
+   * ADA amount.
    */
   @NotNull
-  private Long cpu;
-
-  /**
-   * Maximum execution memory units.
-   */
-  @NotNull
-  private Long memory;
+  @Valid
+  private Ada ada;
 }
