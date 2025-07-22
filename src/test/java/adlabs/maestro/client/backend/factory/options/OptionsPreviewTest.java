@@ -1,108 +1,47 @@
 package adlabs.maestro.client.backend.factory.options;
 
+import adlabs.maestro.client.backend.api.address.AddressesService;
+import adlabs.maestro.client.backend.api.address.model.PaginatedAddressTransaction;
+import adlabs.maestro.client.backend.api.base.Result;
+import adlabs.maestro.client.backend.api.base.exception.ApiException;
+import adlabs.maestro.client.backend.factory.BackendFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OptionsPreviewTest {
-/*
-    private AddressService addressService;
+
+
+    private AddressesService addressService;
 
     @BeforeAll
     public void setup() {
-        addressService = BackendFactory.getMaestroPreviewService().getAddressService();
+        addressService = BackendFactory.getMaestroPreprodService().getAddressService();
     }
 
     @Test
     void MixedOptionsTest() throws ApiException {
-        String address = "addr_test1qrvaadv0h7atv366u6966u4rft2svjlf5uajy8lkpsgdrc24rnskuetxz2u3m5ac22s3njvftxcl2fc8k8kjr088ge0qz98xmv";
-
+        String address = "addr_test1vpfwv0ezc5g8a4mkku8hhy3y3vp92t7s3ul8g778g5yegsgalc6gc";
+        Integer count = 5;
         Options options = Options.builder()
-                .option(Limit.of(10))
-                .option(Offset.of(0))
-                .option(Order.by("block_height", SortType.DESC))
-                .option(Filter.of("block_height", FilterType.GTE, "42248"))
-                .option(Filter.of("block_height", FilterType.LTE, "69447")).build();
+                .option(Cursor.of("AAAAAACkBq4AAFcqJXyj3PK7H4u2_w6hbIaGRhys9vy1dAfpG-KB4U_K"))
+                .option(Count.of(count))
+                .build();
 
-        Result<List<TxHash>> transactionsResult = addressService.getAddressTransactions(List.of(address), options);
+        Result<PaginatedAddressTransaction> transactionsResult = addressService.getAddressTransactions(address, options);
 
         assertTrue(transactionsResult.isSuccessful());
         assertNotNull(transactionsResult.getValue());
         log.info(transactionsResult.getValue().toString());
-        assertEquals(10, transactionsResult.getValue().size());
-        assertEquals("8a1f7811d7c3c46c3421e5b6515239c8cd7cce21c371bb0d5c107d0296fab29d", transactionsResult.getValue().get(0).getTxHash());
-        assertNotEquals(0, transactionsResult.getValue().get(0).getBlockHeight());
-        assertNotNull(transactionsResult.getValue().get(0).getBlockTime());
+        assertEquals(count, transactionsResult.getValue().getData().size());
+        assertEquals("545b33f5211126898e94d14196ba84d76bbfedad80594e6d29daed6f467058ca", transactionsResult.getValue().getData().get(0).getTxHash());
+        assertNotEquals(0, transactionsResult.getValue().getData().get(0).getSlot());
+        assertNotNull(transactionsResult.getValue().getData().get(0).getSlot());
     }
-
-    @Test
-    void MixedWithLogicalOperatorOptionsTest() throws ApiException {
-        String address = "addr_test1qrvaadv0h7atv366u6966u4rft2svjlf5uajy8lkpsgdrc24rnskuetxz2u3m5ac22s3njvftxcl2fc8k8kjr088ge0qz98xmv";
-
-        Options options = Options.builder()
-                .option(Limit.of(6))
-                .option(Offset.of(0))
-                .option(Order.by("block_height", SortType.DESC))
-                .option(LogicalOperatorFilter.of(LogicalOperatorFilterType.AND,
-                        Filter.of("block_height", FilterType.GTE, "42248"),
-                        Filter.of("block_height", FilterType.LTE, "69447"))).build();
-
-        Result<List<TxHash>> transactionsResult = addressService.getAddressTransactions(List.of(address), options);
-
-        assertTrue(transactionsResult.isSuccessful());
-        assertNotNull(transactionsResult.getValue());
-        log.info(transactionsResult.getValue().toString());
-        assertEquals(6, transactionsResult.getValue().size());
-        assertEquals("8a1f7811d7c3c46c3421e5b6515239c8cd7cce21c371bb0d5c107d0296fab29d", transactionsResult.getValue().get(0).getTxHash());
-        assertNotEquals(0, transactionsResult.getValue().get(0).getBlockHeight());
-        assertNotNull(transactionsResult.getValue().get(0).getBlockTime());
-    }
-
-    @Test
-    void MixedWithNotOperatorOptionsTest() throws ApiException {
-        String address = "addr_test1qrvaadv0h7atv366u6966u4rft2svjlf5uajy8lkpsgdrc24rnskuetxz2u3m5ac22s3njvftxcl2fc8k8kjr088ge0qz98xmv";
-
-        Options options = Options.builder()
-                .option(Limit.of(50))
-                .option(Offset.of(0))
-                .option(Order.by("block_height", SortType.DESC))
-                .option(LogicalOperatorFilter.of(LogicalOperatorFilterType.AND,
-                        Filter.of("block_height", FilterType.GTE, "42248"),
-                        Filter.of("block_height", FilterType.LTE, "69447"),
-                        NotOperatorFilter.of(Filter.of("block_height", FilterType.EQ, "58776")))).build();
-
-        Result<List<TxHash>> transactionsResult = addressService.getAddressTransactions(List.of(address), options);
-
-        assertTrue(transactionsResult.isSuccessful());
-        assertNotNull(transactionsResult.getValue());
-        log.info(transactionsResult.getValue().toString());
-        assertEquals(16, transactionsResult.getValue().size());
-        assertEquals("8a1f7811d7c3c46c3421e5b6515239c8cd7cce21c371bb0d5c107d0296fab29d", transactionsResult.getValue().get(0).getTxHash());
-        assertNotEquals(0, transactionsResult.getValue().get(0).getBlockHeight());
-        assertNotNull(transactionsResult.getValue().get(0).getBlockTime());
-    }
-
-    @Test
-    void MixedWithLogicalNotOperatorOptionsTest() throws ApiException {
-        String address = "addr_test1qrvaadv0h7atv366u6966u4rft2svjlf5uajy8lkpsgdrc24rnskuetxz2u3m5ac22s3njvftxcl2fc8k8kjr088ge0qz98xmv";
-
-        Options options = Options.builder()
-                .option(Limit.of(20))
-                .option(Offset.of(0))
-                .option(Order.by("block_height", SortType.DESC))
-                .option(NotOperatorFilter.of(LogicalOperatorFilter.of(LogicalOperatorFilterType.AND,
-                        Filter.of("block_height", FilterType.GTE, "42248"),
-                        Filter.of("block_height", FilterType.LTE, "69447")))).build();
-
-        Result<List<TxHash>> transactionsResult = addressService.getAddressTransactions(List.of(address), options);
-
-        assertTrue(transactionsResult.isSuccessful());
-        assertNotNull(transactionsResult.getValue());
-        log.info(transactionsResult.getValue().toString());
-        assertEquals(20, transactionsResult.getValue().size());
-        assertNotEquals("8a1f7811d7c3c46c3421e5b6515239c8cd7cce21c371bb0d5c107d0296fab29d", transactionsResult.getValue().get(0).getTxHash());
-        assertNotEquals(0, transactionsResult.getValue().get(0).getBlockHeight());
-        assertNotNull(transactionsResult.getValue().get(0).getBlockTime());
-    }*/
 }
