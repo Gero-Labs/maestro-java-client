@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.asset.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
