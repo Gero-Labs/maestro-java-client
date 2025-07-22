@@ -1,22 +1,22 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.address.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
 
 /**
- * Gets or Sets StakingCredKind
+ * Defines the kind of payment credential (key or script).
  */
-public enum StakingCredKind {
+@Getter
+public enum PaymentCredKind {
 
   KEY("key"),
 
-  SCRIPT("script"),
-
-  POINTER("pointer");
+  SCRIPT("script");
 
   private String value;
 
-  StakingCredKind(String value) {
+  PaymentCredKind(String value) {
     this.value = value;
   }
 
@@ -31,8 +31,8 @@ public enum StakingCredKind {
   }
 
   @JsonCreator
-  public static StakingCredKind fromValue(String value) {
-    for (StakingCredKind b : StakingCredKind.values()) {
+  public static PaymentCredKind fromValue(String value) {
+    for (PaymentCredKind b : PaymentCredKind.values()) {
       if (b.value.equals(value)) {
         return b;
       }

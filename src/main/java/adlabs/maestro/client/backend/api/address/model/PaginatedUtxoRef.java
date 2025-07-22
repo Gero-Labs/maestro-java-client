@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 import adlabs.maestro.client.backend.models.LastUpdated;
-import adlabs.maestro.client.backend.models.UtxoRef;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

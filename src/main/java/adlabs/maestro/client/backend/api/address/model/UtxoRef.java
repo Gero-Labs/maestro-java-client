@@ -1,4 +1,4 @@
-package adlabs.maestro.client.backend.models;
+package adlabs.maestro.client.backend.api.address.model;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -8,34 +8,27 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a pointer with certificate index, slot, and transaction index.
+ * Represents a UTxO reference, containing the transaction hash and output index.
  */
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Pointer {
+public class UtxoRef {
 
   /**
-   * Certificate index.
+   * The UTxO transaction index.
    */
   @NotNull
   @Min(0L)
-  private Long certIndex;
+  private Long index;
 
   /**
-   * Slot number.
+   * The UTxO transaction hash.
    */
   @NotNull
-  @Min(0L)
-  private Long slot;
-
-  /**
-   * Transaction index.
-   */
-  @NotNull
-  @Min(0L)
-  private Long txIndex;
+  private String txHash;
 }
