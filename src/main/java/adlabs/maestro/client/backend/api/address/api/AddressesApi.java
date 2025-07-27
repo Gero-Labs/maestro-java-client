@@ -138,7 +138,6 @@ public interface AddressesApi {
      * Return detailed information on UTxOs controlled by an address
      *
      * @param address          Address in bech32 format
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
      * @param options          A map of optional query parameters.
      * <ul>
      * <li>{@code asset}: Return only UTxOs which contain some of a specific asset</li>
@@ -164,7 +163,6 @@ public interface AddressesApi {
      * Return detailed information on UTxOs which are controlled by some address in the specified list of addresses
      *
      * @param requestBody      List of addresses
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
      * @param options          A map of optional query parameters.
      * <ul>
      * <li>{@code resolve_datums}: Try find and include the corresponding datums for datum hashes</li>
@@ -186,7 +184,6 @@ public interface AddressesApi {
      * Return detailed information on UTxOs controlled by addresses which use the specified payment credential
      *
      * @param credential       Payment credential in bech32 format
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
      * @param options          A map of optional query parameters.
      * <ul>
      * <li>{@code asset}: Return only UTxOs which contain some of a specific asset</li>
@@ -212,7 +209,6 @@ public interface AddressesApi {
      * Return detailed information on UTxOs which are controlled by some payment credential in a list of payment credentials.
      *
      * @param requestBody      List of payment credentials
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
      * @param options          A map of optional query parameters.
      * <ul>
      * <li>{@code resolve_datums}: Try find and include the corresponding datums for datum hashes</li>

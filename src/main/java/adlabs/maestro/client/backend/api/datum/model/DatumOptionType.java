@@ -10,8 +10,10 @@ import lombok.Getter;
 @Getter
 public enum DatumOptionType {
 
+  /** Datum is referenced by its hash */
   HASH("hash"),
 
+  /** Datum is provided inline with the transaction */
   INLINE("inline");
 
   private String value;
@@ -20,6 +22,11 @@ public enum DatumOptionType {
     this.value = value;
   }
 
+  /**
+   * Returns the string value associated with this datum option type.
+   *
+   * @return the string representation of this datum option type
+   */
   @JsonValue
   public String getValue() {
     return value;
@@ -30,6 +37,13 @@ public enum DatumOptionType {
     return String.valueOf(value);
   }
 
+  /**
+   * Converts a string value to the corresponding DatumOptionType enum constant.
+   *
+   * @param value the string value to convert
+   * @return the DatumOptionType enum constant corresponding to the given string value
+   * @throws IllegalArgumentException if the value does not match any enum constant
+   */
   @JsonCreator
   public static DatumOptionType fromValue(String value) {
     for (DatumOptionType b : DatumOptionType.values()) {

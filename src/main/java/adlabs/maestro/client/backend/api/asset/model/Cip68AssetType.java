@@ -9,8 +9,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum Cip68AssetType {
 
+  /** Reference NFT that holds metadata and other information */
   REFERENCE_NFT("reference_nft"),
+  
+  /** User-facing NFT (Non-Fungible Token) */
   USER_NFT("user_nft"),
+  
+  /** User-facing FT (Fungible Token) */
   USER_FT("user_ft");
 
   private final String value;
@@ -19,6 +24,11 @@ public enum Cip68AssetType {
     this.value = value;
   }
 
+  /**
+   * Returns the string value associated with this CIP-68 asset type.
+   *
+   * @return the string representation of this CIP-68 asset type
+   */
   @JsonValue
   public String getValue() {
     return value;
@@ -29,6 +39,13 @@ public enum Cip68AssetType {
     return value;
   }
 
+  /**
+   * Converts a string value to the corresponding Cip68AssetType enum constant.
+   *
+   * @param value the string value to convert
+   * @return the Cip68AssetType enum constant corresponding to the given string value
+   * @throws IllegalArgumentException if the value does not match any enum constant
+   */
   @JsonCreator
   public static Cip68AssetType fromValue(String value) {
     for (Cip68AssetType type : Cip68AssetType.values()) {

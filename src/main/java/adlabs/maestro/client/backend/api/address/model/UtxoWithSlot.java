@@ -14,6 +14,12 @@ import java.util.List;
 
 /**
  * Represents a transaction output (UTxO) with the slot information of the block that produced it.
+ * 
+ * <p>This class uses Lombok annotations to generate constructors:
+ * <ul>
+ *   <li>{@code @NoArgsConstructor} - Creates a no-argument constructor</li>
+ *   <li>{@code @AllArgsConstructor} - Creates a constructor with all fields as parameters</li>
+ * </ul>
  */
 @Getter
 @Setter

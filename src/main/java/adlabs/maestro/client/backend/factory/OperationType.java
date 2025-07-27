@@ -13,10 +13,6 @@ public enum OperationType {
      */
     MAESTRO_MAINNET("https://mainnet.gomaestro-api.org/"),
     /**
-     * GuildNet
-     */
-    MAESTRO_GUILD("https://guild.gomaestro-api.org/"),
-    /**
      * Preview
      */
     MAESTRO_PREVIEW("https://preview.gomaestro-api.org/"),

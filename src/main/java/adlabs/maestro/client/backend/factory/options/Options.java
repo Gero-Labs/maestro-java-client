@@ -17,6 +17,10 @@ import java.util.stream.Collectors;
 public class Options {
 
     private final List<Option> optionList;
+    
+    /** 
+     * Constant representing empty options (no query parameters).
+     */
     public static final Options EMPTY = null;
 
     /**
@@ -69,6 +73,11 @@ public class Options {
 
     /**
      * Options Builder
+     * 
+     * <p>This class uses Lombok annotations to generate constructors:
+     * <ul>
+     *   <li>Default constructor - Creates a new OptionsBuilder instance</li>
+     * </ul>
      */
     public static class OptionsBuilder {
 

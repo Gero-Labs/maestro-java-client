@@ -59,6 +59,7 @@ public class BackendServiceImpl implements BackendService {
      * Backend Service Implementation Constructor
      *
      * @param baseUrl baseUrl
+     * @param apiToken Authorization Bearer JWT Token
      */
     public BackendServiceImpl(String baseUrl, String apiToken) {
         log.info("Maestro URL: {}", baseUrl);

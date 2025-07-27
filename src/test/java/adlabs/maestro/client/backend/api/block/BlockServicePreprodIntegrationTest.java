@@ -18,7 +18,11 @@ class BlockServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        blockService = BackendFactory.getMaestroPreprodService().getBlockService();
+        String apiKey = System.getenv("MAESTRO_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
+        }
+        blockService = BackendFactory.getMaestroPreprodService(apiKey).getBlockService();
     }
 
     @Test

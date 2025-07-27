@@ -13,6 +13,12 @@ import java.util.List;
 
 /**
  * Certificate for sending an instantaneous reward (moving funds from treasury or reserves pot to the other pot or to stake accounts).
+ * 
+ * <p>This class uses Lombok annotations to generate constructors:
+ * <ul>
+ *   <li>{@code @NoArgsConstructor} - Creates a no-argument constructor</li>
+ *   <li>{@code @AllArgsConstructor} - Creates a constructor with all fields as parameters</li>
+ * </ul>
  */
 @Getter
 @Setter

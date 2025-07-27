@@ -22,7 +22,11 @@ class OptionsPreviewTest {
 
     @BeforeAll
     public void setup() {
-        addressService = BackendFactory.getMaestroPreprodService().getAddressService();
+        String apiKey = System.getenv("MAESTRO_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
+        }
+        addressService = BackendFactory.getMaestroPreprodService(apiKey).getAddressService();
     }
 
     @Test

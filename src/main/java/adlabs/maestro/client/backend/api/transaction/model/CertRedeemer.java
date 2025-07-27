@@ -13,6 +13,12 @@ import java.util.List;
 /**
  * Certificate redeemer containing authentication data and execution units
  * for certificate-based smart contract interactions.
+ * 
+ * <p>This class uses Lombok annotations to generate constructors:
+ * <ul>
+ *   <li>{@code @NoArgsConstructor} - Creates a no-argument constructor</li>
+ *   <li>{@code @AllArgsConstructor} - Creates a constructor with all fields as parameters</li>
+ * </ul>
  */
 @Getter
 @Setter

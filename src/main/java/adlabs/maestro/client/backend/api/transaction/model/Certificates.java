@@ -11,6 +11,12 @@ import java.util.List;
 /**
  * Certificates found in a blockchain transaction, containing various types of
  * certificate operations including stake delegations, pool registrations, and governance actions.
+ * 
+ * <p>This class uses Lombok annotations to generate constructors:
+ * <ul>
+ *   <li>{@code @NoArgsConstructor} - Creates a no-argument constructor</li>
+ *   <li>{@code @AllArgsConstructor} - Creates a constructor with all fields as parameters</li>
+ * </ul>
  */
 @Getter
 @Setter

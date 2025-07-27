@@ -21,7 +21,11 @@ class DatumServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        datumService = BackendFactory.getMaestroPreprodService().getDatumService();
+        String apiKey = System.getenv("MAESTRO_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
+        }
+        datumService = BackendFactory.getMaestroPreprodService(apiKey).getDatumService();
     }
 
     @Test

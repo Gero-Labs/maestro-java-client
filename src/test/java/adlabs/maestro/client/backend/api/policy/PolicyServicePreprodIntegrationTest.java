@@ -20,7 +20,11 @@ class PolicyServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        policyService = BackendFactory.getMaestroPreprodService().getPolicyService();
+        String apiKey = System.getenv("MAESTRO_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
+        }
+        policyService = BackendFactory.getMaestroPreprodService(apiKey).getPolicyService();
     }
 
     @Test

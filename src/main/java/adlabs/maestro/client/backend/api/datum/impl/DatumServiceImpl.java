@@ -17,6 +17,12 @@ import java.util.List;
 public class DatumServiceImpl extends BaseService implements DatumService {
     private final DatumApi datumApi;
 
+    /**
+     * Constructor for DatumServiceImpl.
+     *
+     * @param baseUrl the base URL for the API
+     * @param apiToken the API token for authentication
+     */
     public DatumServiceImpl(String baseUrl, String apiToken) {
         super(baseUrl, apiToken);
         this.datumApi = getRetrofit().create(DatumApi.class);

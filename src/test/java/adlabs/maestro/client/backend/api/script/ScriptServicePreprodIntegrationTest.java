@@ -18,7 +18,11 @@ class ScriptServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        scriptsService = BackendFactory.getMaestroPreprodService().getScriptsService();
+        String apiKey = System.getenv("MAESTRO_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
+        }
+        scriptsService = BackendFactory.getMaestroPreprodService(apiKey).getScriptsService();
     }
 
     @Test

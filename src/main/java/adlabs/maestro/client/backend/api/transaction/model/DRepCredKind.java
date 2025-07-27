@@ -10,8 +10,10 @@ import lombok.Getter;
 @Getter
 public enum DRepCredKind {
 
+  /** DRep credential based on a cryptographic key */
   KEY("key"),
 
+  /** DRep credential based on a script */
   SCRIPT("script");
 
   private String value;
@@ -20,6 +22,11 @@ public enum DRepCredKind {
     this.value = value;
   }
 
+  /**
+   * Returns the string value associated with this DRep credential kind.
+   *
+   * @return the string representation of this DRep credential kind
+   */
   @JsonValue
   public String getValue() {
     return value;
@@ -30,6 +37,13 @@ public enum DRepCredKind {
     return String.valueOf(value);
   }
 
+  /**
+   * Converts a string value to the corresponding DRepCredKind enum constant.
+   *
+   * @param value the string value to convert
+   * @return the DRepCredKind enum constant corresponding to the given string value
+   * @throws IllegalArgumentException if the value does not match any enum constant
+   */
   @JsonCreator
   public static DRepCredKind fromValue(String value) {
     for (DRepCredKind b : DRepCredKind.values()) {

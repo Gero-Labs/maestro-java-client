@@ -7,6 +7,10 @@ import adlabs.maestro.client.backend.api.datum.model.TimestampedDatumMap;
 
 import java.util.List;
 
+/**
+ * Service interface for datum-related operations.
+ * Provides methods to retrieve datums by their hashes from the blockchain.
+ */
 public interface DatumService {
     /**
      * Get Datum by Datum Hash
@@ -21,7 +25,7 @@ public interface DatumService {
      * Return the datums corresponding to the specified datum hashes, if the datums have been seen on-chain
      * @param datumHashes List of datum hashes
      * @return Map of datum hashes to datum objects
-     * @throws ApiException
+     * @throws ApiException if an error occurs while attempting to invoke the API
      */
     Result<TimestampedDatumMap> getDatumsByHashes(List<String> datumHashes) throws ApiException;
 }

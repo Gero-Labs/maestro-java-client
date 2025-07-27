@@ -22,7 +22,11 @@ class GeneralServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        generalService = BackendFactory.getMaestroPreprodService().getGeneralService();
+        String apiKey = System.getenv("MAESTRO_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
+        }
+        generalService = BackendFactory.getMaestroPreprodService(apiKey).getGeneralService();
     }
 
 

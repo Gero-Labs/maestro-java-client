@@ -9,6 +9,12 @@ import adlabs.maestro.client.backend.models.LastUpdated;
 
 /**
  * Timestamped response. Returns the endpoint response data along with the chain-tip of the indexer, which details at which point in the chain's history the data was correct as-of.
+ * 
+ * <p>This class uses Lombok annotations to generate constructors:
+ * <ul>
+ *   <li>{@code @NoArgsConstructor} - Creates a no-argument constructor</li>
+ *   <li>{@code @AllArgsConstructor} - Creates a constructor with all fields as parameters</li>
+ * </ul>
  */
 @Getter
 @Setter
