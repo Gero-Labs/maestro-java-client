@@ -187,10 +187,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Updated Javadoc Plugin - Lombok-friendly configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <!-- Suppress missing constructor comments (common with Lombok) -->
+                    <additionalOptions>
+                        <additionalOption>-Xdoclint:all,-missing</additionalOption>
+                        <additionalOption>--allow-script-in-comments</additionalOption>
+                    </additionalOptions>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:all,-missing</additionalJOption>
+                    </additionalJOptions>
+
+                    <!-- Reduce verbosity -->
+                    <quiet>true</quiet>
+
+                    <!-- Fail build on documentation errors, but not warnings -->
+                    <failOnError>true</failOnError>
+                    <failOnWarnings>false</failOnWarnings>
+
+                    <!-- Handle Java 11 module path issues -->
+                    <source>11</source>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -200,10 +221,15 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Updated GPG Plugin - Skip by default -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>${maven-gpg-plugin.version}</version>
+                <configuration>
+                    <!-- Skip GPG signing by default -->
+                    <skip>true</skip>
+                </configuration>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -216,6 +242,50 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Profiles for different build scenarios -->
+    <profiles>
+        <!-- Release profile - enables GPG signing for production deployment -->
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
+                        <configuration>
+                            <skip>false</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Strict documentation profile - for documentation reviews -->
+        <profile>
+            <id>strict-docs</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven-javadoc-plugin.version}</version>
+                        <configuration>
+                            <!-- Enable all doclint checks -->
+                            <additionalOptions>
+                                <additionalOption>-Xdoclint:all</additionalOption>
+                            </additionalOptions>
+                            <additionalJOptions>
+                                <additionalJOption>-Xdoclint:all</additionalJOption>
+                            </additionalJOptions>
+                            <failOnWarnings>true</failOnWarnings>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <licenses>
         <license>
