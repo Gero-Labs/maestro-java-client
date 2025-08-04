@@ -1,4 +1,4 @@
-name: Preprod Integration Tests
+name: Preprod
 
 on:
   push:
