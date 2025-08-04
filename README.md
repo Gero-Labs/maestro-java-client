@@ -71,7 +71,7 @@
 
 ```xml
 <dependency>
-    <groupId>io.github.Gero-Labs</groupId>
+    <groupId>io.github.gero-labs</groupId>
     <artifactId>maestro-java-client</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -83,7 +83,7 @@
 <summary>Gradle</summary>
 
 ```gradle
-implementation 'io.github.Gero-Labs:maestro-java-client:1.0.0'
+implementation 'io.github.gero-labs:maestro-java-client:1.0.0'
 ```
 
 </details>
