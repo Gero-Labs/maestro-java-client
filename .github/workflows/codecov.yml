@@ -40,8 +40,10 @@ jobs:
 
       - name: Install Dependencies
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Dgpg.skip
+
       - name: Run tests and collect coverage
-        run: mvn '-Dtest=*Preview*' -B test -Dgpg.skip
+        run: mvn '-Dtest=*Preprod*' -B test -Dgpg.skip
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
