@@ -18,4 +18,4 @@ Open an [Issue Ticket](https://github.com/Gero-Labs/maestro-java-client/issues/n
 Open a [Proposal ticket](https://github.com/Gero-Labs/maestro-java-client/issues/new?template=idea.md).
 
 ### :question: Have a question?
-Open a [Question ticket](https://github.com/Gero-Labs/maestro-java-client/issues/new).~~
+Open a [Question ticket](https://github.com/Gero-Labs/maestro-java-client/issues/new).
