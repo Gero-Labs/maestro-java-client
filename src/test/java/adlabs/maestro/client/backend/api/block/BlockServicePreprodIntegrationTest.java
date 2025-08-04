@@ -4,15 +4,17 @@ import adlabs.maestro.client.backend.api.base.Result;
 import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.api.block.model.TimestampedBlockInfo;
 import adlabs.maestro.client.backend.factory.BackendFactory;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class BlockServicePreprodIntegrationTest {
+
+    private static final Logger log = LoggerFactory.getLogger(BlockServicePreprodIntegrationTest.class);
 
     private BlockService blockService;
 

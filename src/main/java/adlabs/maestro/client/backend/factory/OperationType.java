@@ -1,11 +1,9 @@
 package adlabs.maestro.client.backend.factory;
 
-import lombok.Getter;
 
 /**
  * Operation Type
  */
-@Getter
 public enum OperationType {
 
     /**
@@ -29,5 +27,13 @@ public enum OperationType {
 
     OperationType(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    /**
+     * Gets the base URL for this operation type
+     * @return the base URL
+     */
+    public String getBaseUrl() {
+        return baseUrl;
     }
 }

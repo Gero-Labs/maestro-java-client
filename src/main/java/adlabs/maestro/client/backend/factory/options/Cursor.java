@@ -1,11 +1,8 @@
 package adlabs.maestro.client.backend.factory.options;
 
-import lombok.Getter;
-
 /**
- * Offset
+ * Cursor
  */
-@Getter
 public class Cursor extends Option {
 
     private final String cursor;
@@ -18,6 +15,15 @@ public class Cursor extends Option {
     public Cursor(String cursor) {
         super(OptionType.CURSOR);
         this.cursor = cursor;
+    }
+
+    /**
+     * Gets the cursor value.
+     * 
+     * @return the cursor value
+     */
+    public String getCursor() {
+        return cursor;
     }
 
     /**

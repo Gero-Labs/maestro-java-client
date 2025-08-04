@@ -2,20 +2,30 @@ package adlabs.maestro.client.backend.api.script.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Getter;
 
 /**
  * Script type and version.
  */
-@Getter
 public enum ScriptType {
 
+  /**
+   * Native script type.
+   */
   NATIVE("native"),
 
+  /**
+   * Plutus V1 script type.
+   */
   PLUTUSV1("plutusv1"),
 
+  /**
+   * Plutus V2 script type.
+   */
   PLUTUSV2("plutusv2"),
 
+  /**
+   * Plutus V3 script type.
+   */
   PLUTUSV3("plutusv3");
 
   private String value;
@@ -24,6 +34,11 @@ public enum ScriptType {
     this.value = value;
   }
 
+  /**
+   * Gets the string value of this script type.
+   *
+   * @return the string value
+   */
   @JsonValue
   public String getValue() {
     return value;
@@ -34,6 +49,13 @@ public enum ScriptType {
     return String.valueOf(value);
   }
 
+  /**
+   * Creates a ScriptType from its string value.
+   *
+   * @param value the string value to convert
+   * @return the corresponding ScriptType
+   * @throws IllegalArgumentException if the value is not recognized
+   */
   @JsonCreator
   public static ScriptType fromValue(String value) {
     for (ScriptType b : ScriptType.values()) {

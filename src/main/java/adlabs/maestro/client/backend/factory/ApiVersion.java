@@ -1,11 +1,9 @@
 package adlabs.maestro.client.backend.factory;
 
-import lombok.Getter;
 
 /**
  * API Version
  */
-@Getter
 public enum ApiVersion {
 
     /**
@@ -17,5 +15,13 @@ public enum ApiVersion {
 
     ApiVersion(String version) {
         this.version = version;
+    }
+
+    /**
+     * Gets the API version string
+     * @return the version string
+     */
+    public String getVersion() {
+        return version;
     }
 }

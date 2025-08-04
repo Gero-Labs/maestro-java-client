@@ -2,12 +2,10 @@ package adlabs.maestro.client.backend.api.datum.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Getter;
 
 /**
  * Datum type (inline datum or datum hash).
  */
-@Getter
 public enum DatumOptionType {
 
   /** Datum is referenced by its hash */

@@ -5,7 +5,8 @@ import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.api.datum.model.TimestampedDatum;
 import adlabs.maestro.client.backend.api.datum.model.TimestampedDatumMap;
 import adlabs.maestro.client.backend.factory.BackendFactory;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,10 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.util.List;
 
-@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DatumServicePreprodIntegrationTest {
+
+    private static final Logger log = LoggerFactory.getLogger(DatumServicePreprodIntegrationTest.class);
 
     private DatumService datumService;
 

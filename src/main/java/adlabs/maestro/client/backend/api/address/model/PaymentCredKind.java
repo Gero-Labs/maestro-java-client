@@ -2,16 +2,16 @@ package adlabs.maestro.client.backend.api.address.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Getter;
 
 /**
  * Defines the kind of payment credential (key or script).
  */
-@Getter
 public enum PaymentCredKind {
 
+  /** Key-based payment credential. */
   KEY("key"),
 
+  /** Script-based payment credential. */
   SCRIPT("script");
 
   private String value;
@@ -20,6 +20,11 @@ public enum PaymentCredKind {
     this.value = value;
   }
 
+  /**
+   * Gets the string value of this payment credential kind.
+   *
+   * @return the string value
+   */
   @JsonValue
   public String getValue() {
     return value;
@@ -30,6 +35,13 @@ public enum PaymentCredKind {
     return String.valueOf(value);
   }
 
+  /**
+   * Creates a PaymentCredKind from its string value.
+   *
+   * @param value the string value
+   * @return the corresponding PaymentCredKind
+   * @throws IllegalArgumentException if the value is not recognized
+   */
   @JsonCreator
   public static PaymentCredKind fromValue(String value) {
     for (PaymentCredKind b : PaymentCredKind.values()) {

@@ -1,11 +1,8 @@
 package adlabs.maestro.client.backend.factory.options;
 
-import lombok.Getter;
-
 /**
  * Option
  */
-@Getter
 public abstract class  Option {
 
     private final OptionType optionType;
@@ -17,6 +14,15 @@ public abstract class  Option {
      */
     public Option(OptionType optionType) {
         this.optionType = optionType;
+    }
+
+    /**
+     * Gets the option type.
+     * 
+     * @return the option type
+     */
+    public OptionType getOptionType() {
+        return optionType;
     }
 
     /**

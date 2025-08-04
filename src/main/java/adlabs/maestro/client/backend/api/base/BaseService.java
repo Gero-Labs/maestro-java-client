@@ -2,8 +2,8 @@ package adlabs.maestro.client.backend.api.base;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -27,9 +27,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Base Service
  */
-@Slf4j
-@Getter
 public class BaseService {
+
+    private static final Logger log = LoggerFactory.getLogger(BaseService.class);
 
     private final Retrofit retrofit;
     private int retriesCount = 5;
@@ -293,5 +293,69 @@ public class BaseService {
             paramsMap = options.toMap();
         }
         return paramsMap;
+    }
+
+    /**
+     * Gets the Retrofit instance
+     * @return the Retrofit instance
+     */
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
+
+    /**
+     * Gets the retry count
+     * @return the retry count
+     */
+    public int getRetriesCount() {
+        return retriesCount;
+    }
+
+    /**
+     * Gets whether to retry on timeout
+     * @return true if retry on timeout is enabled
+     */
+    public boolean isRetryOnTimeout() {
+        return retryOnTimeout;
+    }
+
+    /**
+     * Gets the API token
+     * @return the API token
+     */
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    /**
+     * Gets the read timeout in seconds
+     * @return the read timeout in seconds
+     */
+    public int getReadTimeoutSec() {
+        return readTimeoutSec;
+    }
+
+    /**
+     * Gets the connect timeout in seconds
+     * @return the connect timeout in seconds
+     */
+    public int getConnectTimeoutSec() {
+        return connectTimeoutSec;
+    }
+
+    /**
+     * Gets the sleep time in seconds
+     * @return the sleep time in seconds
+     */
+    public int getSleepTimeSec() {
+        return sleepTimeSec;
+    }
+
+    /**
+     * Gets whether GZIP compression is enabled
+     * @return true if GZIP compression is enabled
+     */
+    public boolean isGzipCompression() {
+        return gzipCompression;
     }
 }

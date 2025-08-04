@@ -5,7 +5,8 @@ import adlabs.maestro.client.backend.api.address.model.PaginatedAddressTransacti
 import adlabs.maestro.client.backend.api.base.Result;
 import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.factory.BackendFactory;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -13,9 +14,10 @@ import org.junit.jupiter.api.TestInstance;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OptionsPreviewTest {
+
+    private static final Logger log = LoggerFactory.getLogger(OptionsPreviewTest.class);
 
 
     private AddressesService addressService;

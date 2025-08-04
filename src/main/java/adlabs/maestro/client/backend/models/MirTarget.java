@@ -2,12 +2,9 @@ package adlabs.maestro.client.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Getter;
-
 /**
  * Where the MIR reward(s) are being sent.
  */
-@Getter
 public enum MirTarget {
 
   /** MIR rewards sent to the reserves pot */

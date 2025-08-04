@@ -1,13 +1,11 @@
 package adlabs.maestro.client.backend.factory.options.filters;
 
-import lombok.Getter;
 import adlabs.maestro.client.backend.factory.options.Option;
 import adlabs.maestro.client.backend.factory.options.OptionType;
 
 /**
  * Filter
  */
-@Getter
 public class Filter extends Option {
 
     private final FilterType filterType;
@@ -29,12 +27,39 @@ public class Filter extends Option {
     }
 
     /**
+     * Gets the filter type.
+     * 
+     * @return the filter type
+     */
+    public FilterType getFilterType() {
+        return filterType;
+    }
+
+    /**
+     * Gets the field.
+     * 
+     * @return the field
+     */
+    public String getField() {
+        return field;
+    }
+
+    /**
+     * Gets the raw value.
+     * 
+     * @return the raw value
+     */
+    public String getRawValue() {
+        return value;
+    }
+
+    /**
      * Filter.of Static Constructor
      *
      * @param field      field
      * @param filterType filterType
      * @param value      value
-     * @return new Limit Option Object
+     * @return new Filter Option Object
      */
     public static Filter of(String field, FilterType filterType, String value) {
         return new Filter(field, filterType, value);

@@ -9,7 +9,8 @@ import adlabs.maestro.client.backend.api.transaction.model.TimestampedTxCbor;
 import adlabs.maestro.client.backend.api.transaction.model.TimestampedUtxo;
 import adlabs.maestro.client.backend.factory.BackendFactory;
 import adlabs.maestro.client.backend.factory.options.Options;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -19,9 +20,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TransactionServicePreprodIntegrationTest {
+
+    private static final Logger log = LoggerFactory.getLogger(TransactionServicePreprodIntegrationTest.class);
 
     private TransactionService transactionService;
 

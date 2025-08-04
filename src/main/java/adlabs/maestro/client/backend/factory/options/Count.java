@@ -1,11 +1,8 @@
 package adlabs.maestro.client.backend.factory.options;
 
-import lombok.Getter;
-
 /**
- * Offset
+ * Count
  */
-@Getter
 public class Count extends Option {
 
     private final Integer count;
@@ -18,6 +15,15 @@ public class Count extends Option {
     public Count(Integer count) {
         super(OptionType.COUNT);
         this.count = count;
+    }
+
+    /**
+     * Gets the count value.
+     * 
+     * @return the count value
+     */
+    public Integer getCount() {
+        return count;
     }
 
     /**

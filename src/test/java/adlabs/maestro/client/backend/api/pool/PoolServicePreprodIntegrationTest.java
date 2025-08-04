@@ -5,7 +5,8 @@ import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.api.pool.model.*;
 import adlabs.maestro.client.backend.factory.BackendFactory;
 import adlabs.maestro.client.backend.factory.options.Options;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -13,9 +14,10 @@ import org.junit.jupiter.api.TestInstance;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PoolServicePreprodIntegrationTest {
+
+    private static final Logger log = LoggerFactory.getLogger(PoolServicePreprodIntegrationTest.class);
 
     private PoolService poolService;
     private final String testPoolId = "pool13la5erny3srx9u4fz9tujtl2490350f89r4w4qjhk0vdjmuv78v";

@@ -2,12 +2,9 @@ package adlabs.maestro.client.backend.api.transaction.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Getter;
-
 /**
  * Defines the kind of DRep (credential, abstain, or no_confidence).
  */
-@Getter
 public enum DRepKind {
 
   /** DRep with specific credentials for voting */

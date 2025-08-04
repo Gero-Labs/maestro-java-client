@@ -21,7 +21,6 @@
         <slf4j-api.version>2.0.16</slf4j-api.version>
         <slf4j-reload4j.version>2.0.16</slf4j-reload4j.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <lombok.version>1.18.36</lombok.version>
         <bcprov-jdk15to18.version>1.80</bcprov-jdk15to18.version>
         <junit-jupiter.version>5.11.3</junit-jupiter.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
@@ -87,12 +86,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -187,31 +180,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Updated Javadoc Plugin - Lombok-friendly configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
-                <configuration>
-                    <!-- Suppress missing constructor comments (common with Lombok) -->
-                    <additionalOptions>
-                        <additionalOption>-Xdoclint:all,-missing</additionalOption>
-                        <additionalOption>--allow-script-in-comments</additionalOption>
-                    </additionalOptions>
-                    <additionalJOptions>
-                        <additionalJOption>-Xdoclint:all,-missing</additionalJOption>
-                    </additionalJOptions>
-
-                    <!-- Reduce verbosity -->
-                    <quiet>true</quiet>
-
-                    <!-- Fail build on documentation errors, but not warnings -->
-                    <failOnError>true</failOnError>
-                    <failOnWarnings>false</failOnWarnings>
-
-                    <!-- Handle Java 11 module path issues -->
-                    <source>11</source>
-                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -221,15 +193,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Updated GPG Plugin - Skip by default -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>${maven-gpg-plugin.version}</version>
-                <configuration>
-                    <!-- Skip GPG signing by default -->
-                    <skip>true</skip>
-                </configuration>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -242,50 +209,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- Profiles for different build scenarios -->
-    <profiles>
-        <!-- Release profile - enables GPG signing for production deployment -->
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg-plugin.version}</version>
-                        <configuration>
-                            <skip>false</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!-- Strict documentation profile - for documentation reviews -->
-        <profile>
-            <id>strict-docs</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${maven-javadoc-plugin.version}</version>
-                        <configuration>
-                            <!-- Enable all doclint checks -->
-                            <additionalOptions>
-                                <additionalOption>-Xdoclint:all</additionalOption>
-                            </additionalOptions>
-                            <additionalJOptions>
-                                <additionalJOption>-Xdoclint:all</additionalJOption>
-                            </additionalJOptions>
-                            <failOnWarnings>true</failOnWarnings>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
     <licenses>
         <license>

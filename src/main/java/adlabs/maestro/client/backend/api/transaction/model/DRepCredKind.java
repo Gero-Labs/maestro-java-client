@@ -2,12 +2,9 @@ package adlabs.maestro.client.backend.api.transaction.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Getter;
-
 /**
  * Defines the kind of DRep credential (key or script).
  */
-@Getter
 public enum DRepCredKind {
 
   /** DRep credential based on a cryptographic key */

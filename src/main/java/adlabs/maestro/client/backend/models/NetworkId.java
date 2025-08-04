@@ -2,12 +2,9 @@ package adlabs.maestro.client.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Getter;
-
 /**
  * Represents the network ID (mainnet or testnet).
  */
-@Getter
 public enum NetworkId {
 
   /** The Cardano mainnet network */

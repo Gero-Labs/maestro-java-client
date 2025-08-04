@@ -5,7 +5,8 @@ import adlabs.maestro.client.backend.api.base.Result;
 import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.factory.BackendFactory;
 import adlabs.maestro.client.backend.factory.options.Options;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AddressServicePreprodIntegrationTest {
+
+    private static final Logger log = LoggerFactory.getLogger(AddressServicePreprodIntegrationTest.class);
 
     private AddressesService addressService;
 

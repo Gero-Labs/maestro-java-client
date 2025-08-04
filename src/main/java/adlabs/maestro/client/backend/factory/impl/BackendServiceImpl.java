@@ -18,9 +18,8 @@ import adlabs.maestro.client.backend.api.script.ScriptsService;
 import adlabs.maestro.client.backend.api.script.impl.ScriptsServiceImpl;
 import adlabs.maestro.client.backend.api.transaction.TransactionService;
 import adlabs.maestro.client.backend.api.transaction.impl.TransactionServiceImpl;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import adlabs.maestro.client.backend.api.account.AccountService;
 import adlabs.maestro.client.backend.api.account.impl.AccountServiceImpl;
 import adlabs.maestro.client.backend.factory.ApiVersion;
@@ -30,10 +29,8 @@ import adlabs.maestro.client.backend.factory.OperationType;
 /**
  * Backend Service Implementation
  */
-@Getter
-@Setter
-@Slf4j
 public class BackendServiceImpl implements BackendService {
+    private static final Logger log = LoggerFactory.getLogger(BackendServiceImpl.class);
     private final AccountService accountService;
     private final AddressesService addressService;
     private final AssetService assetService;
@@ -84,5 +81,55 @@ public class BackendServiceImpl implements BackendService {
      */
     public BackendServiceImpl(OperationType operationType, ApiVersion apiVersion, String apiToken) {
         this(operationType.getBaseUrl() + apiVersion.getVersion() + "/", apiToken);
+    }
+
+    @Override
+    public AccountService getAccountService() {
+        return accountService;
+    }
+
+    @Override
+    public AddressesService getAddressService() {
+        return addressService;
+    }
+
+    @Override
+    public AssetService getAssetService() {
+        return assetService;
+    }
+
+    @Override
+    public BlockService getBlockService() {
+        return blockService;
+    }
+
+    @Override
+    public DatumService getDatumService() {
+        return datumService;
+    }
+
+    @Override
+    public PolicyService getPolicyService() {
+        return policyService;
+    }
+
+    @Override
+    public PoolService getPoolService() {
+        return poolService;
+    }
+
+    @Override
+    public TransactionService getTransactionService() {
+        return transactionService;
+    }
+
+    @Override
+    public ScriptsService getScriptsService() {
+        return scriptsService;
+    }
+
+    @Override
+    public GeneralService getGeneralService() {
+        return generalService;
     }
 }

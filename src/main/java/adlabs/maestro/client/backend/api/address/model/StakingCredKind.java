@@ -8,10 +8,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum StakingCredKind {
 
+  /**
+   * Key-based staking credential.
+   */
   KEY("key"),
 
+  /**
+   * Script-based staking credential.
+   */
   SCRIPT("script"),
 
+  /**
+   * Pointer-based staking credential.
+   */
   POINTER("pointer");
 
   private String value;
@@ -20,6 +29,11 @@ public enum StakingCredKind {
     this.value = value;
   }
 
+  /**
+   * Gets the string value of this staking credential kind.
+   *
+   * @return the string value
+   */
   @JsonValue
   public String getValue() {
     return value;
@@ -30,6 +44,13 @@ public enum StakingCredKind {
     return String.valueOf(value);
   }
 
+  /**
+   * Creates a StakingCredKind from its string value.
+   *
+   * @param value the string value to convert
+   * @return the corresponding StakingCredKind
+   * @throws IllegalArgumentException if the value is not recognized
+   */
   @JsonCreator
   public static StakingCredKind fromValue(String value) {
     for (StakingCredKind b : StakingCredKind.values()) {
