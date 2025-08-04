@@ -1,5 +1,11 @@
 name: Codecov
+
 on: [push]
+
+env:
+  MAESTRO_API_KEY: ${{ secrets.MAESTRO_PREPROD_API_KEY }}
+  MAESTRO_JAVA_LIB_LOGGING: true
+
 jobs:
   run:
     runs-on: ubuntu-latest
