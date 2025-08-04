@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class OptionsPreviewTest {
+class OptionsPreprodTest {
 
-    private static final Logger log = LoggerFactory.getLogger(OptionsPreviewTest.class);
+    private static final Logger log = LoggerFactory.getLogger(OptionsPreprodTest.class);
 
 
     private AddressesService addressService;
