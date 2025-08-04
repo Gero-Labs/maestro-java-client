@@ -1,6 +1,6 @@
 package adlabs.maestro.client.backend.api.script.api;
 
-import adlabs.maestro.client.backend.models.TimestampedScriptFirstSeen;
+import adlabs.maestro.client.backend.api.script.model.TimestampedScriptFirstSeen;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

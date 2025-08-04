@@ -1,21 +1,15 @@
 package adlabs.maestro.client.backend.factory;
 
-import lombok.Getter;
 
 /**
  * Operation Type
  */
-@Getter
 public enum OperationType {
 
     /**
      * Mainnet
      */
     MAESTRO_MAINNET("https://mainnet.gomaestro-api.org/"),
-    /**
-     * GuildNet
-     */
-    MAESTRO_GUILD("https://guild.gomaestro-api.org/"),
     /**
      * Preview
      */
@@ -33,5 +27,13 @@ public enum OperationType {
 
     OperationType(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    /**
+     * Gets the base URL for this operation type
+     * @return the base URL
+     */
+    public String getBaseUrl() {
+        return baseUrl;
     }
 }

@@ -1,11 +1,8 @@
 package adlabs.maestro.client.backend.factory.options;
 
-import lombok.Getter;
-
 /**
  * Offset
  */
-@Getter
 public class Offset extends Option {
 
     private final long offset;
@@ -18,6 +15,15 @@ public class Offset extends Option {
     public Offset(long offset) {
         super(OptionType.OFFSET);
         this.offset = offset;
+    }
+
+    /**
+     * Gets the offset value.
+     * 
+     * @return the offset value
+     */
+    public long getOffset() {
+        return offset;
     }
 
     /**

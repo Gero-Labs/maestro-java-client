@@ -1,6 +1,5 @@
 package adlabs.maestro.client.backend.factory.options.filters;
 
-import lombok.Getter;
 import adlabs.maestro.client.backend.factory.options.Option;
 import adlabs.maestro.client.backend.factory.options.OptionType;
 
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 /**
  * Logical Operator Filter
  */
-@Getter
 public class LogicalOperatorFilter extends Option {
 
     private final List<Option> options;
@@ -28,6 +26,24 @@ public class LogicalOperatorFilter extends Option {
         super(OptionType.LOGICAL_FILTER);
         this.logicalOperatorFilterType = logicalOperatorFilterType;
         this.options = options;
+    }
+
+    /**
+     * Gets the list of options.
+     * 
+     * @return the list of options
+     */
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    /**
+     * Gets the logical operator filter type.
+     * 
+     * @return the logical operator filter type
+     */
+    public LogicalOperatorFilterType getLogicalOperatorFilterType() {
+        return logicalOperatorFilterType;
     }
 
     /**

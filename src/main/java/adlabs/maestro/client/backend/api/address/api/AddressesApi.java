@@ -1,22 +1,11 @@
 package adlabs.maestro.client.backend.api.address.api;
 
-import adlabs.maestro.client.backend.api.address.model.AddressInfo;
-import adlabs.maestro.client.backend.api.address.model.Balance;
-import adlabs.maestro.client.backend.api.address.model.PaginatedAddressTransaction;
-import adlabs.maestro.client.backend.api.address.model.PaginatedPaymentCredentialTransaction;
-import adlabs.maestro.client.backend.api.address.model.PaginatedPaymentCredentialsTransaction;
-import adlabs.maestro.client.backend.api.address.model.PaginatedUtxoRef;
-import adlabs.maestro.client.backend.api.address.PaginatedUtxoWithSlot;
-import adlabs.maestro.client.backend.api.address.model.TimestampedTxCount;
+import adlabs.maestro.client.backend.api.address.model.*;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Addresses API
@@ -32,7 +21,7 @@ public interface AddressesApi {
      * @return Lovelace and native asset balance of payment credential
      */
     @GET("addresses/cred/{credential}/balance")
-    Call<Balance> balanceByPaymentCred(
+    Call<TimestampedBalance> getBalanceByPaymentCred(
             @Path("credential") String credential
     );
 
@@ -56,7 +45,7 @@ public interface AddressesApi {
      * @return Get the transaction count for an address
      */
     @GET("addresses/{address}/transactions/count")
-    Call<TimestampedTxCount> txCountByAddress(
+    Call<TimestampedTxCount> getAddressTransactionsCount(
             @Path("address") String address
     );
 
@@ -65,21 +54,20 @@ public interface AddressesApi {
      * Returns transactions in which the specified address spent or received funds.
      *
      * @param address Address in bech32 format
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by point in chain)
-     * @param from Return only transactions minted on or after a specific slot
-     * @param to Return only transactions minted on or before a specific slot
-     * @param cursor Pagination cursor string
+     * @param options A map of optional query parameters.
+     * <ul>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code order}: The order in which the results are sorted (by point in chain)</li>
+     * <li>{@code from}: Return only transactions minted on or after a specific slot</li>
+     * <li>{@code to}: Return only transactions minted on or before a specific slot</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return Get the transactions for an address
      */
     @GET("addresses/{address}/transactions")
-    Call<PaginatedAddressTransaction> txsByAddress(
+    Call<PaginatedAddressTransaction> getAddressTransactions(
             @Path("address") String address,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("from") Long from,
-            @Query("to") Long to,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -87,21 +75,20 @@ public interface AddressesApi {
      * Returns transactions in which the specified payment credential spent or received funds, or was a required signer.
      *
      * @param credential Payment credential in bech32 format
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by point in chain)
-     * @param from Return only transactions minted on or after a specific slot
-     * @param to Return only transactions minted on or before a specific slot
-     * @param cursor Pagination cursor string
+     * @param options    A map of optional query parameters.
+     * <ul>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code order}: The order in which the results are sorted (by point in chain)</li>
+     * <li>{@code from}: Return only transactions minted on or after a specific slot</li>
+     * <li>{@code to}: Return only transactions minted on or before a specific slot</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return Get the transactions for an address
      */
     @GET("addresses/cred/{credential}/transactions")
-    Call<PaginatedPaymentCredentialTransaction> txsByPaymentCred(
+    Call<PaginatedPaymentCredentialTransaction> getTransactionsByPaymentCredential(
             @Path("credential") String credential,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("from") Long from,
-            @Query("to") Long to,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -109,21 +96,20 @@ public interface AddressesApi {
      * Returns transactions in which at least one of a list specified payment credentials spent or received funds, or was a required signer.
      *
      * @param requestBody List of payment credentials
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by point in chain)
-     * @param from Return only transactions minted on or after a specific slot
-     * @param to Return only transactions minted on or before a specific slot
-     * @param cursor Pagination cursor string
+     * @param options     A map of optional query parameters.
+     * <ul>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code order}: The order in which the results are sorted (by point in chain)</li>
+     * <li>{@code from}: Return only transactions minted on or after a specific slot</li>
+     * <li>{@code to}: Return only transactions minted on or before a specific slot</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return Transactions involving payment credentials
      */
     @POST("addresses/cred/transactions")
-    Call<PaginatedPaymentCredentialsTransaction> txsByPaymentCreds(
+    Call<PaginatedPaymentCredentialsTransaction> getTransactionsByPaymentCredentials(
             @Body List<String> requestBody,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("from") Long from,
-            @Query("to") Long to,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 
     /**
@@ -131,124 +117,111 @@ public interface AddressesApi {
      * Returns references (pair of transaction hash and output index in transaction) for UTxOs controlled by the specified address
      *
      * @param address Address in bech32 format
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param from Return only UTxOs created on or after a specific slot
-     * @param to Return only UTxOs created on or before a specific slot
-     * @param cursor Pagination cursor string
+     * @param options A map of optional query parameters.
+     * <ul>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code order}: The order in which the results are sorted (by slot at which UTxO was produced)</li>
+     * <li>{@code from}: Return only UTxOs created on or after a specific slot</li>
+     * <li>{@code to}: Return only UTxOs created on or before a specific slot</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return UTxO references for all the unspent transaction outputs at an address
      */
     @GET("addresses/{address}/utxo_refs")
-    Call<PaginatedUtxoRef> utxoRefsAtAddress(
+    Call<PaginatedUtxoRef> getUTxORefsByAddress(
             @Path("address") String address,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("from") Long from,
-            @Query("to") Long to,
-            @Query("cursor") String cursor
+            @QueryMap Map<String, String> options
     );
 
     /**
      * UTxOs at an address
      * Return detailed information on UTxOs controlled by an address
      *
-     * @param address Address in bech32 format
-     * @param asset Return only UTxOs which contain some of a specific asset
-     * @param resolveDatums Try find and include the corresponding datums for datum hashes
-     * @param withCbor Include the CBOR encodings of the transaction outputs in the response
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param from Return only UTxOs created on or after a specific slot
-     * @param to Return only UTxOs created on or before a specific slot
-     * @param cursor Pagination cursor string
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
+     * @param address          Address in bech32 format
+     * @param options          A map of optional query parameters.
+     * <ul>
+     * <li>{@code asset}: Return only UTxOs which contain some of a specific asset</li>
+     * <li>{@code resolve_datums}: Try find and include the corresponding datums for datum hashes</li>
+     * <li>{@code with_cbor}: Include the CBOR encodings of the transaction outputs in the response</li>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code order}: The order in which the results are sorted (by slot at which UTxO was produced)</li>
+     * <li>{@code from}: Return only UTxOs created on or after a specific slot</li>
+     * <li>{@code to}: Return only UTxOs created on or before a specific slot</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return Get all unspent transaction outputs at an address
      */
+    @Headers("amounts-as-strings: true")
     @GET("addresses/{address}/utxos")
-    Call<PaginatedUtxoWithSlot> utxosByAddress(
+    Call<PaginatedUtxoWithSlot> getUTxOsByAddress(
             @Path("address") String address,
-            @Query("asset") String asset,
-            @Query("resolve_datums") Boolean resolveDatums,
-            @Query("with_cbor") Boolean withCbor,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("from") Long from,
-            @Query("to") Long to,
-            @Query("cursor") String cursor,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @QueryMap Map<String, String> options
     );
 
     /**
      * UTxOs by multiple addresses
      * Return detailed information on UTxOs which are controlled by some address in the specified list of addresses
      *
-     * @param requestBody List of addresses
-     * @param resolveDatums Try find and include the corresponding datums for datum hashes
-     * @param withCbor Include the CBOR encodings of the transaction outputs in the response
-     * @param count The max number of results per page
-     * @param cursor Pagination cursor string
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
+     * @param requestBody      List of addresses
+     * @param options          A map of optional query parameters.
+     * <ul>
+     * <li>{@code resolve_datums}: Try find and include the corresponding datums for datum hashes</li>
+     * <li>{@code with_cbor}: Include the CBOR encodings of the transaction outputs in the response</li>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return Get all unspent transaction outputs residing at any address in a list
      */
+    @Headers("amounts-as-strings: true")
     @POST("addresses/utxos")
-    Call<PaginatedUtxoWithSlot> utxosByAddresses(
+    Call<PaginatedUtxoWithSlot> getUTxOsByAddresses(
             @Body List<String> requestBody,
-            @Query("resolve_datums") Boolean resolveDatums,
-            @Query("with_cbor") Boolean withCbor,
-            @Query("count") Integer count,
-            @Query("cursor") String cursor,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @QueryMap Map<String, String> options
     );
 
     /**
      * UTxOs by payment credential
      * Return detailed information on UTxOs controlled by addresses which use the specified payment credential
      *
-     * @param credential Payment credential in bech32 format
-     * @param asset Return only UTxOs which contain some of a specific asset
-     * @param resolveDatums Try find and include the corresponding datums for datum hashes
-     * @param withCbor Include the CBOR encodings of the transaction outputs in the response
-     * @param count The max number of results per page
-     * @param order The order in which the results are sorted (by slot at which UTxO was produced)
-     * @param from Return only UTxOs created on or after a specific slot
-     * @param to Return only UTxOs created on or before a specific slot
-     * @param cursor Pagination cursor string
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
+     * @param credential       Payment credential in bech32 format
+     * @param options          A map of optional query parameters.
+     * <ul>
+     * <li>{@code asset}: Return only UTxOs which contain some of a specific asset</li>
+     * <li>{@code resolve_datums}: Try find and include the corresponding datums for datum hashes</li>
+     * <li>{@code with_cbor}: Include the CBOR encodings of the transaction outputs in the response</li>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code order}: The order in which the results are sorted (by slot at which UTxO was produced)</li>
+     * <li>{@code from}: Return only UTxOs created on or after a specific slot</li>
+     * <li>{@code to}: Return only UTxOs created on or before a specific slot</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return Get all unspent transaction outputs at addresses with the given payment credential
      */
+    @Headers("amounts-as-strings: true")
     @GET("addresses/cred/{credential}/utxos")
-    Call<PaginatedUtxoWithSlot> utxosByPaymentCred(
+    Call<PaginatedUtxoWithSlot> getUTxOsByPaymentCredential(
             @Path("credential") String credential,
-            @Query("asset") String asset,
-            @Query("resolve_datums") Boolean resolveDatums,
-            @Query("with_cbor") Boolean withCbor,
-            @Query("count") Integer count,
-            @Query("order") String order,
-            @Query("from") Long from,
-            @Query("to") Long to,
-            @Query("cursor") String cursor,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @QueryMap Map<String, String> options
     );
 
     /**
      * UTxOs by multiple payment credentials
      * Return detailed information on UTxOs which are controlled by some payment credential in a list of payment credentials.
      *
-     * @param requestBody List of payment credentials
-     * @param resolveDatums Try find and include the corresponding datums for datum hashes
-     * @param withCbor Include the CBOR encodings of the transaction outputs in the response
-     * @param count The max number of results per page
-     * @param cursor Pagination cursor string
-     * @param amountsAsStrings Large numbers returned as strings if set to `true`
+     * @param requestBody      List of payment credentials
+     * @param options          A map of optional query parameters.
+     * <ul>
+     * <li>{@code resolve_datums}: Try find and include the corresponding datums for datum hashes</li>
+     * <li>{@code with_cbor}: Include the CBOR encodings of the transaction outputs in the response</li>
+     * <li>{@code count}: The max number of results per page</li>
+     * <li>{@code cursor}: Pagination cursor string</li>
+     * </ul>
      * @return Unspent transaction outputs
      */
+    @Headers("amounts-as-strings: true")
     @POST("addresses/cred/utxos")
-    Call<PaginatedUtxoWithSlot> utxosByPaymentCreds(
+    Call<PaginatedUtxoWithSlot> getUTxOsByPaymentCredentials(
             @Body List<String> requestBody,
-            @Query("resolve_datums") Boolean resolveDatums,
-            @Query("with_cbor") Boolean withCbor,
-            @Query("count") Integer count,
-            @Query("cursor") String cursor,
-            @Header("amounts-as-strings") String amountsAsStrings
+            @QueryMap Map<String, String> options
     );
 }

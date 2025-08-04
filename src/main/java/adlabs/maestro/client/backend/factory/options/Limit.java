@@ -1,11 +1,8 @@
 package adlabs.maestro.client.backend.factory.options;
 
-import lombok.Getter;
-
 /**
  * Limit
  */
-@Getter
 public class Limit extends Option {
 
     private final long limit;
@@ -18,6 +15,15 @@ public class Limit extends Option {
     public Limit(long limit) {
         super(OptionType.LIMIT);
         this.limit = limit;
+    }
+
+    /**
+     * Gets the limit value.
+     * 
+     * @return the limit value
+     */
+    public long getLimit() {
+        return limit;
     }
 
     /**

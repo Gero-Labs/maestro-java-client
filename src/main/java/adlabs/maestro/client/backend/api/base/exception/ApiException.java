@@ -1,13 +1,8 @@
 package adlabs.maestro.client.backend.api.base.exception;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * ApiException
  */
-@Getter
-@Setter
 public class ApiException extends Exception {
 
     /**

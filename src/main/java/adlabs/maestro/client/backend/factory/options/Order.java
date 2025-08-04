@@ -1,18 +1,15 @@
 package adlabs.maestro.client.backend.factory.options;
 
-import lombok.Getter;
-
 /**
- * Limit
+ * Order
  */
-@Getter
 public class Order extends Option {
 
     private final String param;
     private final SortType sortType;
 
     /**
-     * Limit Option Constructor
+     * Order Option Constructor
      *
      * @param param Param to Order By
      * @param sortType SortType ASC or DESC
@@ -24,11 +21,29 @@ public class Order extends Option {
     }
 
     /**
-     * Limit.of Static Constructor
+     * Gets the parameter to order by.
+     * 
+     * @return the parameter to order by
+     */
+    public String getParam() {
+        return param;
+    }
+
+    /**
+     * Gets the sort type.
+     * 
+     * @return the sort type
+     */
+    public SortType getSortType() {
+        return sortType;
+    }
+
+    /**
+     * Order.by Static Constructor
      *
      * @param param    Parameter to Order By
      * @param sortType SortType - ASC or DESC
-     * @return new Limit Option Object
+     * @return new Order Option Object
      */
     public static Order by(String param, SortType sortType) {
         return new Order(param, sortType);

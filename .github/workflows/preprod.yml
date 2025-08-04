@@ -1,0 +1,59 @@
+name: Preprod
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'
+
+env:
+  KOIOS_JAVA_LIB_LOGGING: true
+
+jobs:
+  preprod:
+    name: Preprod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Ensure ~/.m2/repository exists
+        run: mkdir -p ~/.m2/repository
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ runner.os }}-
+
+      - name: Set up Maven settings
+        run: |
+          mkdir -p $HOME/.m2
+          cat <<EOF > $HOME/.m2/settings.xml
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ secrets.GH_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+
+      - name: Run tests
+        run: |
+          mvn '-Dtest=*Preprod*' verify -Djacoco.destFile=exportJacoco/jacoco-preview.exec -Dgpg.skip
+      - name: Upload Jacoco Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-tests-jacoco
+          path: exportJacoco/jacoco-preview.exec

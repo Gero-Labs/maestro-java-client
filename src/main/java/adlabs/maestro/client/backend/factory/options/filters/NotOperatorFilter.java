@@ -1,19 +1,17 @@
 package adlabs.maestro.client.backend.factory.options.filters;
 
-import lombok.Getter;
 import adlabs.maestro.client.backend.factory.options.Option;
 import adlabs.maestro.client.backend.factory.options.OptionType;
 
 /**
  * Not Operator Logical Operator Filter
  */
-@Getter
 public class NotOperatorFilter extends Option {
 
     private final Option option;
 
     /**
-     * LogicalOperatorFilter Constructor
+     * NotOperatorFilter Constructor
      *
      * @param option Option to negate
      */
@@ -23,7 +21,16 @@ public class NotOperatorFilter extends Option {
     }
 
     /**
-     * Filter.of Static Constructor
+     * Gets the option to negate.
+     * 
+     * @return the option to negate
+     */
+    public Option getOption() {
+        return option;
+    }
+
+    /**
+     * NotOperatorFilter.of Static Constructor
      *
      * @param option Option to negate
      * @return new NotOperatorFilter Option Object

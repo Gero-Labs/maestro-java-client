@@ -9,7 +9,18 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * OkHttp interceptor that handles GZIP compression for HTTP requests and responses.
+ * Automatically adds Accept-Encoding headers and decompresses GZIP responses.
+ */
 public class GzipInterceptor implements Interceptor {
+    
+    /**
+     * Default constructor for GzipInterceptor.
+     */
+    public GzipInterceptor() {
+        // Default constructor
+    }
     @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {

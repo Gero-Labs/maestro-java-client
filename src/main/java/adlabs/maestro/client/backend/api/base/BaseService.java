@@ -2,13 +2,11 @@ package adlabs.maestro.client.backend.api.base;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-import okhttp3.Interceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
-import org.jetbrains.annotations.NotNull;
 import adlabs.maestro.client.backend.api.base.exception.ApiException;
 import adlabs.maestro.client.backend.api.base.interceptor.GzipInterceptor;
 import adlabs.maestro.client.backend.factory.options.Options;
@@ -29,9 +27,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Base Service
  */
-@Slf4j
-@Getter
 public class BaseService {
+
+    private static final Logger log = LoggerFactory.getLogger(BaseService.class);
 
     private final Retrofit retrofit;
     private int retriesCount = 5;
@@ -60,7 +58,7 @@ public class BaseService {
     public BaseService(String baseUrl, String apiToken) {
         this.apiToken = apiToken;
 
-        String strReadTimeoutSec = System.getenv("MAESTRO_JAVA_LIB_READ_TIMEOUT_SEC");
+        String strReadTimeoutSec = System.getenv("MAESTRO_READ_TIMEOUT_SEC");
         if (strReadTimeoutSec != null && !strReadTimeoutSec.isEmpty()) {
             int readTimeoutSec = Integer.parseInt(strReadTimeoutSec);
             if (readTimeoutSec >= 1) {
@@ -68,7 +66,7 @@ public class BaseService {
             }
         }
 
-        String strConnectTimeoutSec = System.getenv("MAESTRO_JAVA_LIB_CONNECT_TIMEOUT_SEC");
+        String strConnectTimeoutSec = System.getenv("MAESTRO_CONNECT_TIMEOUT_SEC");
         if (strConnectTimeoutSec != null && !strConnectTimeoutSec.isEmpty()) {
             int connectTimeoutSec = Integer.parseInt(strConnectTimeoutSec);
             if (connectTimeoutSec >= 1) {
@@ -85,41 +83,36 @@ public class BaseService {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClientBuilder.addInterceptor(interceptor).build();
         }
-        String apiKey = System.getenv("MAESTRO_JAVA_LIB_API_KEY");
 
-        if (apiKey != null && !apiKey.isEmpty()) {
-            okHttpClientBuilder.addInterceptor(new Interceptor() {
-                @NotNull
-                @Override
-                public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
-                    Request original = chain.request();
+        if (apiToken != null && !apiToken.isEmpty()) {
+            okHttpClientBuilder.addInterceptor(chain -> {
+                Request original = chain.request();
 
-                    Request request = original.newBuilder()
-                            .header("api-key", apiKey)
-                            .method(original.method(), original.body())
-                            .build();
-                    return chain.proceed(request);
-                }
+                Request request = original.newBuilder()
+                        .header("api-key", apiToken)
+                        .method(original.method(), original.body())
+                        .build();
+                return chain.proceed(request);
             });
         }
 
-        if (System.getenv("MAESTRO_JAVA_LIB_GZIP_COMPRESSION") != null) {
-            gzipCompression = Boolean.parseBoolean(System.getenv("MAESTRO_JAVA_LIB_GZIP_COMPRESSION"));
+        if (System.getenv("MAESTRO_GZIP_COMPRESSION") != null) {
+            gzipCompression = Boolean.parseBoolean(System.getenv("MAESTRO_GZIP_COMPRESSION"));
         }
         if (gzipCompression) {
             okHttpClientBuilder.addInterceptor(new GzipInterceptor());
         }
 
-        String strRetries = System.getenv("MAESTRO_JAVA_LIB_RETRIES_COUNT");
+        String strRetries = System.getenv("MAESTRO_RETRIES_COUNT");
         if (strRetries != null && !strRetries.isEmpty()) {
             retriesCount = Math.max(Integer.parseInt(strRetries), 1);
         }
-        String retryOnTimeoutEnv = System.getenv("MAESTRO_JAVA_LIB_RETRY_ON_TIMEOUT");
+        String retryOnTimeoutEnv = System.getenv("MAESTRO_RETRY_ON_TIMEOUT");
         if (retryOnTimeoutEnv != null && !Boolean.parseBoolean(retryOnTimeoutEnv)) {
             retryOnTimeout = false;
         }
 
-        String sleepTimeSecEnv = System.getenv("MAESTRO_JAVA_LIB_RETRY_SLEEP_TIME_SEC");
+        String sleepTimeSecEnv = System.getenv("MAESTRO_RETRY_SLEEP_TIME_SEC");
         if (sleepTimeSecEnv != null && !sleepTimeSecEnv.isEmpty()) {
             sleepTimeSec = Math.max(Integer.parseInt(sleepTimeSecEnv), 60);
         }
@@ -129,27 +122,43 @@ public class BaseService {
                 .create(objectMapper)).build();
     }
 
+    /**
+     * Processes a response that expects to return a single item from a list.
+     *
+     * @param call the API call that returns a list
+     * @param <T> the type of items in the list
+     * @return a Result containing the first item from the list, or an error if the list is empty
+     * @throws ApiException if the API call fails
+     */
     protected <T> Result<T> processResponseGetOne(Call<List<T>> call) throws ApiException {
         try {
+            @SuppressWarnings("unchecked")
             Response<List<T>> response = (Response<List<T>>) execute(call);
             if (response.isSuccessful()) {
                 if (response.body() != null && !response.body().isEmpty()) {
-                    return (Result<T>) Result.builder().successful(true).response(response.toString()).value(response.body().get(0)).code(response.code()).build();
+                    return Result.<T>builder().successful(true).response(response.toString()).value(response.body().get(0)).code(response.code()).build();
                 } else if (response.body() != null) {
-                    return (Result<T>) Result.builder().successful(false).response("Response Body is Empty").code(404).build();
+                    return Result.<T>builder().successful(false).response("Response Body is Empty").code(404).build();
                 } else {
-                    return (Result<T>) Result.builder().successful(false).response("Response Body is Invalid").code(500).build();
+                    return Result.<T>builder().successful(false).response("Response Body is Invalid").code(500).build();
                 }
             } else {
-                return (Result<T>) Result.builder().successful(false).response(Objects.requireNonNull(response.errorBody()).string()).code(response.code()).build();
+                return Result.<T>builder().successful(false).response(Objects.requireNonNull(response.errorBody()).string()).code(response.code()).build();
             }
         } catch (IOException e) {
             throw new ApiException(e.getMessage(), e);
         }
     }
 
+    /**
+     * Creates a Result object for bad request responses.
+     *
+     * @param responseText the response text from the bad request
+     * @param <T> the type of the result
+     * @return a Result object indicating a failed request with status code 400
+     */
     protected <T> Result<T> badRequestResult(String responseText) {
-        return (Result<T>) Result.builder().successful(false).response(responseText).code(400).build();
+        return Result.<T>builder().successful(false).response(responseText).code(400).build();
     }
 
     /**
@@ -162,11 +171,12 @@ public class BaseService {
      */
     protected <T> Result<T> processResponse(Call<?> call) throws ApiException {
         try {
+            @SuppressWarnings("unchecked")
             Response<T> response = (Response<T>) execute(call);
             if (response.isSuccessful())
-                return (Result<T>) Result.builder().successful(true).response(response.toString()).value(response.body()).code(response.code()).build();
+                return Result.<T>builder().successful(true).response(response.toString()).value(response.body()).code(response.code()).build();
             else
-                return (Result<T>) Result.builder().successful(false).response(Objects.requireNonNull(response.errorBody()).string()).code(response.code()).build();
+                return Result.<T>builder().successful(false).response(Objects.requireNonNull(response.errorBody()).string()).code(response.code()).build();
         } catch (IOException e) {
             throw new ApiException(e.getMessage(), e);
         }
@@ -271,11 +281,81 @@ public class BaseService {
         }
     }
 
+    /**
+     * Converts an Options object to a parameter map for API calls.
+     *
+     * @param options the Options object containing query parameters
+     * @return a Map of parameter names to values
+     */
     protected Map<String, String> optionsToParamMap(Options options) {
         Map<String, String> paramsMap = Collections.emptyMap();
         if (options != null && !options.getOptionList().isEmpty()) {
             paramsMap = options.toMap();
         }
         return paramsMap;
+    }
+
+    /**
+     * Gets the Retrofit instance
+     * @return the Retrofit instance
+     */
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
+
+    /**
+     * Gets the retry count
+     * @return the retry count
+     */
+    public int getRetriesCount() {
+        return retriesCount;
+    }
+
+    /**
+     * Gets whether to retry on timeout
+     * @return true if retry on timeout is enabled
+     */
+    public boolean isRetryOnTimeout() {
+        return retryOnTimeout;
+    }
+
+    /**
+     * Gets the API token
+     * @return the API token
+     */
+    public String getApiToken() {
+        return apiToken;
+    }
+
+    /**
+     * Gets the read timeout in seconds
+     * @return the read timeout in seconds
+     */
+    public int getReadTimeoutSec() {
+        return readTimeoutSec;
+    }
+
+    /**
+     * Gets the connect timeout in seconds
+     * @return the connect timeout in seconds
+     */
+    public int getConnectTimeoutSec() {
+        return connectTimeoutSec;
+    }
+
+    /**
+     * Gets the sleep time in seconds
+     * @return the sleep time in seconds
+     */
+    public int getSleepTimeSec() {
+        return sleepTimeSec;
+    }
+
+    /**
+     * Gets whether GZIP compression is enabled
+     * @return true if GZIP compression is enabled
+     */
+    public boolean isGzipCompression() {
+        return gzipCompression;
     }
 }
