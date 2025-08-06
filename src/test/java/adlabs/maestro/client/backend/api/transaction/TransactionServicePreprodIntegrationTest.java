@@ -31,9 +31,9 @@ class TransactionServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_API_KEY");
+        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_API_KEY Environment Variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY Environment Variable is not set. Please set it before running tests.");
         }
         transactionService = BackendFactory.getMaestroPreprodService(apiKey).getTransactionService();
         txHash = "ae06c0cb89cdb0c715e75272da4a07ded594dda5ccc1ab0cb4c9d070825dce57";
