@@ -27,9 +27,9 @@ class AccountServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_API_KEY_PREPROD");
+        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
         }
         accountService = BackendFactory.getMaestroPreprodService(apiKey).getAccountService();
     }
