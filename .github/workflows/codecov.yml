@@ -3,7 +3,7 @@ name: Codecov
 on: [push]
 
 env:
-  MAESTRO_API_KEY: ${{ secrets.MAESTRO_PREPROD_API_KEY }}
+  MAESTRO_API_KEY: ${{ secrets.MAESTRO_API_KEY }}
   MAESTRO_JAVA_LIB_LOGGING: true
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
         run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V -Dgpg.skip
 
       - name: Run tests and collect coverage
-        run: mvn '-Dtest=*Preprod*' -B test -Dgpg.skip
+        run: mvn '-Dtest=*Mainnet*' -B test -Dgpg.skip
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5

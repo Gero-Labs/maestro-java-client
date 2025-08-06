@@ -7,7 +7,7 @@ on:
     - cron: '0 0 * * *'  # Run daily at midnight UTC
 
 env:
-  MAESTRO_API_KEY: ${{ secrets.MAESTRO_PREPROD_API_KEY }}
+  MAESTRO_PREPROD_API_KEY: ${{ secrets.MAESTRO_PREPROD_API_KEY }}
   MAESTRO_JAVA_LIB_LOGGING: true
 
 jobs:
