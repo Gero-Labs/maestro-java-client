@@ -37,7 +37,7 @@ class GeneralServicePreprodIntegrationTest {
         Result<TimestampedChainTip> chainTipResult = generalService.getChainTip();
         assertTrue(chainTipResult.isSuccessful());
         assertNotNull(chainTipResult.getValue());
-        log.info(chainTipResult.getValue().toString());
+        log.info("getChainTipTest: " + chainTipResult.getValue().toString());
     }
 
     @Test
@@ -45,7 +45,7 @@ class GeneralServicePreprodIntegrationTest {
         Result<TimestampedEraSummaries> eraSummariesResult = generalService.getEraSummaries();
         assertTrue(eraSummariesResult.isSuccessful());
         assertNotNull(eraSummariesResult.getValue());
-        log.info(eraSummariesResult.getValue().toString());
+        log.info("getEraSummariesTest: " + eraSummariesResult.getValue().toString());
     }
 
     @Test
@@ -53,7 +53,7 @@ class GeneralServicePreprodIntegrationTest {
         Result<TimestampedProtocolParameters> protocolParametersResult = generalService.getProtocolParameters();
         assertTrue(protocolParametersResult.isSuccessful());
         assertNotNull(protocolParametersResult.getValue());
-        log.info(protocolParametersResult.getValue().toString());
+        log.info("getProtocolParametersTest: " + protocolParametersResult.getValue().toString());
     }
 
     @Test
@@ -61,7 +61,7 @@ class GeneralServicePreprodIntegrationTest {
         Result<TimestampedSystemStart> systemStartResult = generalService.getSystemStart();
         assertTrue(systemStartResult.isSuccessful());
         assertNotNull(systemStartResult.getValue());
-        log.info(systemStartResult.getValue().toString());
+        log.info("getSystemStartTest: " + systemStartResult.getValue().toString());
     }
 
 }

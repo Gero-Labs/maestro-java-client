@@ -33,7 +33,7 @@ class ScriptServicePreprodIntegrationTest {
         Result<TimestampedScriptFirstSeen> scriptInformationResult = scriptsService.getScriptByHash(scriptHash);
         Assertions.assertTrue(scriptInformationResult.isSuccessful());
         Assertions.assertNotNull(scriptInformationResult.getValue());
-        log.info(scriptInformationResult.getValue().toString());
+        log.info("getScriptInformationTest: " + scriptInformationResult.getValue().toString());
     }
 
 }

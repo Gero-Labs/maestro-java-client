@@ -33,7 +33,7 @@ class BlockServicePreprodIntegrationTest {
         Result<TimestampedBlockInfo> latestBlockResult = blockService.getLatestBlock();
         Assertions.assertTrue(latestBlockResult.isSuccessful());
         Assertions.assertNotNull(latestBlockResult.getValue());
-        log.info(latestBlockResult.getValue().toString());
+        log.info("getLatestBlockTest: " + latestBlockResult.getValue().toString());
     }
 
     @Test
@@ -43,7 +43,7 @@ class BlockServicePreprodIntegrationTest {
         Result<TimestampedBlockInfo> blockSummaryResult = blockService.getBlockInfo(blockHashOrHeight);
         Assertions.assertTrue(blockSummaryResult.isSuccessful());
         Assertions.assertNotNull(blockSummaryResult.getValue());
-        log.info(blockSummaryResult.getValue().toString());
+        log.info("getBlockInformationTest: " + blockSummaryResult.getValue().toString());
     }
 
 }

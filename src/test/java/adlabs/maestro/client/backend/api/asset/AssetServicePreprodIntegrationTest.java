@@ -39,7 +39,7 @@ class AssetServicePreprodIntegrationTest {
         Result<TimestampedAssetInfo> assetInfoResult = assetsService.getAssetInfo(asset);
         Assertions.assertTrue(assetInfoResult.isSuccessful());
         Assertions.assertNotNull(assetInfoResult.getValue());
-        log.info(assetInfoResult.getValue().toString());
+        log.info("getAssetInformationTest: " + assetInfoResult.getValue().toString());
     }
 
     @Test
@@ -53,7 +53,7 @@ class AssetServicePreprodIntegrationTest {
         Result<PaginatedAssetHolderAccount> assetInfoResult = assetsService.getAssetAccounts(asset, Options.EMPTY);
         Assertions.assertTrue(assetInfoResult.isSuccessful());
         Assertions.assertNotNull(assetInfoResult.getValue());
-        log.info(assetInfoResult.getValue().toString());
+        log.info("getAssetAccountsTest: " + assetInfoResult.getValue().toString());
     }
 
     @Test
@@ -67,7 +67,7 @@ class AssetServicePreprodIntegrationTest {
         Result<PaginatedAssetHolder> assetInfoResult = assetsService.getAssetAddresses(asset, Options.EMPTY);
         Assertions.assertTrue(assetInfoResult.isSuccessful());
         Assertions.assertNotNull(assetInfoResult.getValue());
-        log.info(assetInfoResult.getValue().toString());
+        log.info("getAssetddressesTest: " + assetInfoResult.getValue().toString());
     }
 
     @Test
@@ -81,7 +81,7 @@ class AssetServicePreprodIntegrationTest {
         Result<PaginatedMintTransaction> assetMints = assetsService.getAssetMints(asset, Options.EMPTY);
         Assertions.assertTrue(assetMints.isSuccessful());
         Assertions.assertNotNull(assetMints.getValue());
-        log.info(assetMints.getValue().toString());
+        log.info("getAssetMintsAndBurnsTest: " + assetMints.getValue().toString());
     }
 
     @Test
@@ -95,7 +95,7 @@ class AssetServicePreprodIntegrationTest {
         Result<PaginatedTimestampedTransaction> assetMints = assetsService.getAssetTransactions(asset, Options.EMPTY);
         Assertions.assertTrue(assetMints.isSuccessful());
         Assertions.assertNotNull(assetMints.getValue());
-        log.info(assetMints.getValue().toString());
+        log.info("getAssetTransactionsTest: " + assetMints.getValue().toString());
     }
 
     @Test
@@ -109,6 +109,6 @@ class AssetServicePreprodIntegrationTest {
         Result<PaginatedAssetUtxo> assetUtxos = assetsService.getAssetUtxos(asset, Options.EMPTY);
         Assertions.assertTrue(assetUtxos.isSuccessful());
         Assertions.assertNotNull(assetUtxos.getValue());
-        log.info(assetUtxos.getValue().toString());
+        log.info("getAssetUTxOsTest: " + assetUtxos.getValue().toString());
     }
 }

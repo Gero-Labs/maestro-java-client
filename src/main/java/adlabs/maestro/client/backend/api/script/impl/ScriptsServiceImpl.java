@@ -34,6 +34,7 @@ public class ScriptsServiceImpl extends BaseService implements ScriptsService {
 
     @Override
     public Result<TimestampedScriptFirstSeen> getScriptByHash(String scriptHash) throws ApiException {
+        validateHexFormat(scriptHash);
         Call<TimestampedScriptFirstSeen> call = scriptsApi.scriptByHash(scriptHash);
         return processResponse(call);
     }

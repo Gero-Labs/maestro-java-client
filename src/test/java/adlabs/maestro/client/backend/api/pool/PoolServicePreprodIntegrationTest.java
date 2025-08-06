@@ -36,7 +36,7 @@ class PoolServicePreprodIntegrationTest {
         Result<PaginatedPoolListInfo> poolsListResult = poolService.getPoolList(Options.EMPTY);
         assertTrue(poolsListResult.isSuccessful());
         assertNotNull(poolsListResult.getValue());
-        log.info(poolsListResult.getValue().toString());
+        log.info("getPoolListTest: " + poolsListResult.getValue().toString());
     }
 
     @Test
@@ -44,7 +44,7 @@ class PoolServicePreprodIntegrationTest {
         Result<PaginatedPoolBlock> poolBlocksResult = poolService.getPoolBlocks(testPoolId, Options.EMPTY);
         assertTrue(poolBlocksResult.isSuccessful());
         assertNotNull(poolBlocksResult.getValue());
-        log.info(poolBlocksResult.getValue().toString());
+        log.info("getPoolBlocksTest: " + poolBlocksResult.getValue().toString());
     }
 
     @Test
@@ -52,7 +52,7 @@ class PoolServicePreprodIntegrationTest {
         Result<PaginatedDelegatorInfo> poolDelegatorsResult = poolService.getPoolDelegators(testPoolId, Options.EMPTY);
         assertTrue(poolDelegatorsResult.isSuccessful());
         assertNotNull(poolDelegatorsResult.getValue());
-        log.info(poolDelegatorsResult.getValue().toString());
+        log.info("getPoolDelegatorsTest: " + poolDelegatorsResult.getValue().toString());
     }
 
     @Test
@@ -61,7 +61,7 @@ class PoolServicePreprodIntegrationTest {
         Result<PaginatedHistoricalDelegatorInfo> delegatorHistoryResult = poolService.getPoolDelegatorHistory(testPoolId, epochNo, Options.EMPTY);
         assertTrue(delegatorHistoryResult.isSuccessful());
         assertNotNull(delegatorHistoryResult.getValue());
-        log.info(delegatorHistoryResult.getValue().toString());
+        log.info("getPoolDelegatorHistoryTest: " + delegatorHistoryResult.getValue().toString());
     }
 
     @Test
@@ -69,7 +69,7 @@ class PoolServicePreprodIntegrationTest {
         Result<PaginatedPoolHistory> poolHistoryResult = poolService.getPoolHistory(testPoolId, Options.EMPTY);
         assertTrue(poolHistoryResult.isSuccessful());
         assertNotNull(poolHistoryResult.getValue());
-        log.info(poolHistoryResult.getValue().toString());
+        log.info("getPoolHistoryTest: " + poolHistoryResult.getValue().toString());
     }
 
     @Test
@@ -77,7 +77,7 @@ class PoolServicePreprodIntegrationTest {
         Result<TimestampedPoolInfo> poolInfoResult = poolService.getPoolInfo(testPoolId);
         assertTrue(poolInfoResult.isSuccessful());
         assertNotNull(poolInfoResult.getValue());
-        log.info(poolInfoResult.getValue().toString());
+        log.info("getPoolInfoTest: " + poolInfoResult.getValue().toString());
     }
 
     @Test
@@ -85,7 +85,7 @@ class PoolServicePreprodIntegrationTest {
         Result<TimestampedPoolMetadata> poolMetadataResult = poolService.getPoolMetadata(testPoolId);
         assertTrue(poolMetadataResult.isSuccessful());
         assertNotNull(poolMetadataResult.getValue());
-        log.info(poolMetadataResult.getValue().toString());
+        log.info("getPoolMetadataTest: " + poolMetadataResult.getValue().toString());
     }
 
     @Test
@@ -93,7 +93,7 @@ class PoolServicePreprodIntegrationTest {
         Result<TimestampedPoolRelays> poolRelaysResult = poolService.getPoolRelays(testPoolId);
         assertTrue(poolRelaysResult.isSuccessful());
         assertNotNull(poolRelaysResult.getValue());
-        log.info(poolRelaysResult.getValue().toString());
+        log.info("getPoolRelaysTest: " + poolRelaysResult.getValue().toString());
     }
 
     @Test
@@ -101,6 +101,6 @@ class PoolServicePreprodIntegrationTest {
         Result<TimestampedPoolUpdates> poolUpdatesResult = poolService.getPoolUpdates(testPoolId);
         assertTrue(poolUpdatesResult.isSuccessful());
         assertNotNull(poolUpdatesResult.getValue());
-        log.info(poolUpdatesResult.getValue().toString());
+        log.info("getPoolUpdatesTest: " + poolUpdatesResult.getValue().toString());
     }
 }

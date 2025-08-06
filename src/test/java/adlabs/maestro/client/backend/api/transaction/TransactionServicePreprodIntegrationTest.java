@@ -26,6 +26,8 @@ class TransactionServicePreprodIntegrationTest {
     private static final Logger log = LoggerFactory.getLogger(TransactionServicePreprodIntegrationTest.class);
 
     private TransactionService transactionService;
+    private String txHash;
+    private int txHashIndex;
 
     @BeforeAll
     public void setup() {
@@ -34,55 +36,52 @@ class TransactionServicePreprodIntegrationTest {
             throw new IllegalStateException("MAESTRO_API_KEY Environment Variable is not set. Please set it before running tests.");
         }
         transactionService = BackendFactory.getMaestroPreprodService(apiKey).getTransactionService();
+        txHash = "ae06c0cb89cdb0c715e75272da4a07ded594dda5ccc1ab0cb4c9d070825dce57";
+        txHashIndex = 0;
     }
 
     @Test
     void getTxOsByTxORefsTest() throws ApiException {
         // txHash of the format List.of("TxHash#Index")
-        List<String> txHashes = List.of("ae06c0cb89cdb0c715e75272da4a07ded594dda5ccc1ab0cb4c9d070825dce57#0",
+        var tx1 = txHash+"#"+ txHashIndex;
+        List<String> txHashes = List.of(tx1,
                 "cb5321e4223faf3dae1b7eb7c76223ad8a7294da1abdde544c9d325ea044cf15#0");
         Result<PaginatedUtxoWithBytes> paginatedUtxoWithBytesResult = transactionService.getTxOsByTxORefs(txHashes, Options.EMPTY);
         assertTrue(paginatedUtxoWithBytesResult.isSuccessful());
         assertNotNull(paginatedUtxoWithBytesResult.getValue());
-        log.info(paginatedUtxoWithBytesResult.getValue().toString());
+        log.info("getTxOsByTxORefsTest: " + paginatedUtxoWithBytesResult.getValue().toString());
     }
 
     @Test
     void getTxInfoTest() throws ApiException {
-        String txHash = "ae06c0cb89cdb0c715e75272da4a07ded594dda5ccc1ab0cb4c9d070825dce57";
         Result<TimestampedTransactionInfo> timestampedTransactionInfoResult = transactionService.getTxInfo(txHash);
         assertTrue(timestampedTransactionInfoResult.isSuccessful());
         assertNotNull(timestampedTransactionInfoResult.getValue());
-        log.info(timestampedTransactionInfoResult.getValue().toString());
+        log.info("getTxInfoTest: " + timestampedTransactionInfoResult.getValue().toString());
     }
 
     @Test
     void getTxCborByTxHashTest() throws ApiException {
-        String txHash = "ae06c0cb89cdb0c715e75272da4a07ded594dda5ccc1ab0cb4c9d070825dce57";
         Result<TimestampedTxCbor> timestampedTxCborResult = transactionService.getTxCborByTxHash(txHash);
         assertTrue(timestampedTxCborResult.isSuccessful());
         assertNotNull(timestampedTxCborResult.getValue());
-        log.info(timestampedTxCborResult.getValue().toString());
+        log.info("getTxCborByTxHashTest: " + timestampedTxCborResult.getValue().toString());
     }
 
     @Test
     void getAddressByTxoTest() throws ApiException {
-        String txHash = "cb5321e4223faf3dae1b7eb7c76223ad8a7294da1abdde544c9d325ea044cf15";
-        int index = 0;
-        Result<TimestampedAddress> timestampedAddressResult = transactionService.getAddressByTxO(txHash, index);
+        Result<TimestampedAddress> timestampedAddressResult = transactionService.getAddressByTxO(txHash, txHashIndex);
         assertTrue(timestampedAddressResult.isSuccessful());
         assertNotNull(timestampedAddressResult.getValue());
-        log.info(timestampedAddressResult.getValue().toString());
+        log.info("getAddressByTxoTest: " + timestampedAddressResult.getValue().toString());
     }
 
     @Test
     void getTxOByTxORefTest() throws ApiException {
-        String txHash = "ae06c0cb89cdb0c715e75272da4a07ded594dda5ccc1ab0cb4c9d070825dce57";
-        int index = 0;
-        Result<TimestampedUtxo> timestampedUtxoResult = transactionService.getTxOByTxORef(txHash, index, Options.EMPTY);
+        Result<TimestampedUtxo> timestampedUtxoResult = transactionService.getTxOByTxORef(txHash, txHashIndex, Options.EMPTY);
         assertTrue(timestampedUtxoResult.isSuccessful());
         assertNotNull(timestampedUtxoResult.getValue());
-        log.info(timestampedUtxoResult.getValue().toString());
+        log.info("getTxOByTxORefTest: " + timestampedUtxoResult.getValue().toString());
     }
 
     /*
@@ -93,7 +92,7 @@ class TransactionServicePreprodIntegrationTest {
         Result<List<EvaluatedRedeemer>> evaluatedRedeemerResult = transactionService.evaluateRedeemers(evaluateRequest);
         assertTrue(evaluatedRedeemerResult.isSuccessful());
         assertNotNull(evaluatedRedeemerResult.getValue());
-        log.info(evaluatedRedeemerResult.getValue().toString());
+        log.info("evaluateRedeemersTest: " + evaluatedRedeemerResult.getValue().toString());
     }*/
 
 }

@@ -27,7 +27,7 @@ class AccountServicePreprodIntegrationTest {
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY_PREPROD");
         if (apiKey == null || apiKey.trim().isEmpty()) {
             throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
@@ -40,7 +40,7 @@ class AccountServicePreprodIntegrationTest {
         Result<TimestampedAccountInfo> accountInformationResult = accountService.getAccountInfo(address, Options.EMPTY); //options.amounts-as-strings
         Assertions.assertTrue(accountInformationResult.isSuccessful());
         Assertions.assertNotNull(accountInformationResult.getValue());
-        log.info(accountInformationResult.getValue().toString());
+        log.info("getAccountInformationTest: " + accountInformationResult.getValue().toString());
     }
 
     @Test
@@ -56,7 +56,7 @@ class AccountServicePreprodIntegrationTest {
         Result<PaginatedAddress> accountAddressesResult = accountService.getAccountAddresses(address, Options.EMPTY);
         Assertions.assertTrue(accountAddressesResult.isSuccessful());
         Assertions.assertNotNull(accountAddressesResult.getValue());
-        log.info(accountAddressesResult.getValue().toString());
+        log.info("getAccountAddressesTest: " + accountAddressesResult.getValue().toString());
     }
 
     @Test
@@ -72,7 +72,7 @@ class AccountServicePreprodIntegrationTest {
         Result<PaginatedAsset> accountAssetsResult = accountService.getAccountAssets(address, Options.EMPTY);
         Assertions.assertTrue(accountAssetsResult.isSuccessful());
         Assertions.assertNotNull(accountAssetsResult.getValue());
-        log.info(accountAssetsResult.getValue().toString());
+        log.info("getAccountAssetsTest: " + accountAssetsResult.getValue().toString());
     }
 
     @Test
@@ -88,7 +88,7 @@ class AccountServicePreprodIntegrationTest {
         Result<PaginatedAccountDelegation> delegationsResult = accountService.getAccountDelegations(stakeAddresses, Options.EMPTY);
         Assertions.assertTrue(delegationsResult.isSuccessful());
         Assertions.assertNotNull(delegationsResult.getValue());
-        log.info(delegationsResult.getValue().toString());
+        log.info("getAccountDelegationsTest: " + delegationsResult.getValue().toString());
     }
 
     @Test
@@ -104,7 +104,7 @@ class AccountServicePreprodIntegrationTest {
         Result<PaginatedAccountHistory> accountHistoryResult = accountService.getAccountHistory(stakeAddresses, Options.EMPTY);
         Assertions.assertTrue(accountHistoryResult.isSuccessful());
         Assertions.assertNotNull(accountHistoryResult.getValue());
-        log.info(accountHistoryResult.getValue().toString());
+        log.info("getAccountHistoryTest: " + accountHistoryResult.getValue().toString());
     }
 
     @Test
@@ -123,7 +123,7 @@ class AccountServicePreprodIntegrationTest {
         Assertions.assertNotNull(accountRewardsResult.getValue());
         Assertions.assertFalse(accountRewardsResult.getValue().getData().isEmpty());
         Assertions.assertEquals(epochNo, accountRewardsResult.getValue().getData().get(0).getEarnedEpoch());
-        log.info(accountRewardsResult.getValue().toString());
+        log.info("getAccountRewardsTest: " + accountRewardsResult.getValue().toString());
     }
 
     @Test
@@ -139,7 +139,7 @@ class AccountServicePreprodIntegrationTest {
         Result<PaginatedAccountUpdate> accountRewardsResult = accountService.getAccountUpdates(stakeAddresses, Options.EMPTY);
         Assertions.assertTrue(accountRewardsResult.isSuccessful());
         Assertions.assertNotNull(accountRewardsResult.getValue());
-        log.info(accountRewardsResult.getValue().toString());
+        log.info("getAccountUpdatesTest: " + accountRewardsResult.getValue().toString());
     }
 
     @Test

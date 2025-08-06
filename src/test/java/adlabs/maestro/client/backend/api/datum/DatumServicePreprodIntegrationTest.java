@@ -37,7 +37,7 @@ class DatumServicePreprodIntegrationTest {
         Result<TimestampedDatum> datumByHashResult = datumService.getDatumByHash(datumHash);
         Assertions.assertTrue(datumByHashResult.isSuccessful());
         Assertions.assertNotNull(datumByHashResult.getValue());
-        log.info(datumByHashResult.getValue().toString());
+        log.info("getDatumByHashTest: " + datumByHashResult.getValue().toString());
     }
 
     @Test
@@ -47,7 +47,7 @@ class DatumServicePreprodIntegrationTest {
         Result<TimestampedDatumMap> datumByHashResult = datumService.getDatumsByHashes(datumHashes);
         Assertions.assertTrue(datumByHashResult.isSuccessful());
         Assertions.assertNotNull(datumByHashResult.getValue());
-        log.info(datumByHashResult.getValue().toString());
+        log.info("getDatumsByHashesTest: " + datumByHashResult.getValue().toString());
     }
 
 }

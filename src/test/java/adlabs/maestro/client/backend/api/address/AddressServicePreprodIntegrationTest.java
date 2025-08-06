@@ -40,7 +40,7 @@ class AddressServicePreprodIntegrationTest {
         Result<PaginatedPaymentCredentialsTransaction> txHashesResult = addressService.getTransactionsByPaymentCredentials(paymentCredentials, Options.EMPTY);
         Assertions.assertTrue(txHashesResult.isSuccessful());
         Assertions.assertNotNull(txHashesResult.getValue());
-        log.info(txHashesResult.getValue().toString());
+        log.info("getTransactionsByPaymentCredentialsTest: " + txHashesResult.getValue().toString());
     }
 
     @Test
@@ -56,7 +56,7 @@ class AddressServicePreprodIntegrationTest {
         Result<PaginatedUtxoWithSlot> addressUTxOsResult = addressService.getUTxOsByPaymentCredentials(paymentCredentials, false, false, Options.EMPTY);
         Assertions.assertTrue(addressUTxOsResult.isSuccessful());
         Assertions.assertNotNull(addressUTxOsResult.getValue());
-        log.info(addressUTxOsResult.getValue().toString());
+        log.info("getUTxOsFromPaymentCredentialsTest: " + addressUTxOsResult.getValue().toString());
     }
 
     @Test
@@ -65,7 +65,7 @@ class AddressServicePreprodIntegrationTest {
         Result<TimestampedBalance> addressBalanceResult = addressService.getBalanceByPaymentCredential(paymentCredential);
         Assertions.assertTrue(addressBalanceResult.isSuccessful());
         Assertions.assertNotNull(addressBalanceResult.getValue());
-        log.info(addressBalanceResult.getValue().toString());
+        log.info("getBalancesByPaymentCredentialTest: " + addressBalanceResult.getValue().toString());
     }
 
     @Test
@@ -74,7 +74,7 @@ class AddressServicePreprodIntegrationTest {
         Result<PaginatedPaymentCredentialTransaction> transactionsResult = addressService.getTransactionsByPaymentCredential(paymentCredential, Options.EMPTY);
         Assertions.assertTrue(transactionsResult.isSuccessful());
         Assertions.assertNotNull(transactionsResult.getValue());
-        log.info(transactionsResult.getValue().toString());
+        log.info("getTransactionsByPaymentCredentialTest: " + transactionsResult.getValue().toString());
     }
 
     @Test
@@ -84,7 +84,7 @@ class AddressServicePreprodIntegrationTest {
                 .getUTxOsByPaymentCredential(paymentCredential,null,false,true, Options.EMPTY);
         Assertions.assertTrue(transactionsResult.isSuccessful());
         Assertions.assertNotNull(transactionsResult.getValue());
-        log.info(transactionsResult.getValue().toString());
+        log.info("getUTxOsByPaymentCredentialTest: " + transactionsResult.getValue().toString());
     }
 
     @Test
@@ -94,7 +94,7 @@ class AddressServicePreprodIntegrationTest {
                 .getUTxOsByPaymentCredentials(paymentCredentials,false,false, Options.EMPTY);
         Assertions.assertTrue(transactionsResult.isSuccessful());
         Assertions.assertNotNull(transactionsResult.getValue());
-        log.info(transactionsResult.getValue().toString());
+        log.info("getUTxOsByPaymentCredentialsTest: " + transactionsResult.getValue().toString());
     }
 
     @Test
@@ -104,7 +104,7 @@ class AddressServicePreprodIntegrationTest {
                 .decodeAddress(stakeAddress);
         Assertions.assertTrue(addressInfoResult.isSuccessful());
         Assertions.assertNotNull(addressInfoResult.getValue());
-        log.info(addressInfoResult.getValue().toString());
+        log.info("decodeAddressTest: " + addressInfoResult.getValue().toString());
     }
 
     @Test
@@ -114,7 +114,7 @@ class AddressServicePreprodIntegrationTest {
                 .getAddressTransactions(stakeAddress, Options.EMPTY);
         Assertions.assertTrue(addressInfoResult.isSuccessful());
         Assertions.assertNotNull(addressInfoResult.getValue());
-        log.info(addressInfoResult.getValue().toString());
+        log.info("getAddressTransactionsTest: " + addressInfoResult.getValue().toString());
     }
 
     @Test
@@ -124,7 +124,7 @@ class AddressServicePreprodIntegrationTest {
                 .getUTxORefsByAddress(addressBech32, Options.EMPTY);
         Assertions.assertTrue(addressUTxORefs.isSuccessful());
         Assertions.assertNotNull(addressUTxORefs.getValue());
-        log.info(addressUTxORefs.getValue().toString());
+        log.info("getUTxOsRefBysAddressTest: " + addressUTxORefs.getValue().toString());
     }
 
     @Test
@@ -134,7 +134,7 @@ class AddressServicePreprodIntegrationTest {
                 .getUTxOsByAddresses(addresses, false, false,Options.EMPTY);
         Assertions.assertTrue(addressUTxORefs.isSuccessful());
         Assertions.assertNotNull(addressUTxORefs.getValue());
-        log.info(addressUTxORefs.getValue().toString());
+        log.info("getUTxOsBysAddressTest: " + addressUTxORefs.getValue().toString());
     }
 
 }

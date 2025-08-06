@@ -44,7 +44,7 @@ class OptionsPreprodTest {
 
         assertTrue(transactionsResult.isSuccessful());
         assertNotNull(transactionsResult.getValue());
-        log.info(transactionsResult.getValue().toString());
+        log.info("MixedOptionsTest: " + transactionsResult.getValue().toString());
         assertEquals(count, transactionsResult.getValue().getData().size());
         assertEquals("545b33f5211126898e94d14196ba84d76bbfedad80594e6d29daed6f467058ca", transactionsResult.getValue().getData().get(0).getTxHash());
         assertNotEquals(0, transactionsResult.getValue().getData().get(0).getSlot());

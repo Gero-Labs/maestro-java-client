@@ -35,7 +35,7 @@ class PolicyServicePreprodIntegrationTest {
         Result<PaginatedPolicyHolderAccount> result = policyService.getPolicyAccounts(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
-        log.info(result.getValue().toString());
+        log.info("getPolicyAccountsTest: " + result.getValue().toString());
     }
 
     @Test
@@ -44,7 +44,7 @@ class PolicyServicePreprodIntegrationTest {
         Result<PaginatedPolicyHolder> result = policyService.getPolicyAddresses(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
-        log.info(result.getValue().toString());
+        log.info("getPolicyAddressesTest: " + result.getValue().toString());
     }
 
     @Test
@@ -53,7 +53,7 @@ class PolicyServicePreprodIntegrationTest {
         Result<PaginatedAssetInfoConcise> result = policyService.getPolicyAssets(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
-        log.info(result.getValue().toString());
+        log.info("getPolicyAssetsTest: " + result.getValue().toString());
     }
 
     @Test
@@ -62,7 +62,7 @@ class PolicyServicePreprodIntegrationTest {
         Result<TimestampedPolicyInfo> result = policyService.getPolicyInfo(policyID);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
-        log.info(result.getValue().toString());
+        log.info("getPolicyInfoTest: " + result.getValue().toString());
     }
 
     @Test
@@ -71,7 +71,7 @@ class PolicyServicePreprodIntegrationTest {
         Result<PaginatedPolicyMintTransaction> result = policyService.getPolicyMints(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
-        log.info(result.getValue().toString());
+        log.info("getPolicyMintsTest: " + result.getValue().toString());
     }
 
     @Test
@@ -80,7 +80,7 @@ class PolicyServicePreprodIntegrationTest {
         Result<PaginatedPolicyTransaction> result = policyService.getPolicyTxs(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
-        log.info(result.getValue().toString());
+        log.info("getPolicyTxsTest: " + result.getValue().toString());
     }
 
     @Test
@@ -89,6 +89,6 @@ class PolicyServicePreprodIntegrationTest {
         Result<PaginatedPolicyUtxo> result = policyService.getPolicyUtxos(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
-        log.info(result.getValue().toString());
+        log.info("getPolicyUtxosTest: " + result.getValue().toString());
     }
 }
