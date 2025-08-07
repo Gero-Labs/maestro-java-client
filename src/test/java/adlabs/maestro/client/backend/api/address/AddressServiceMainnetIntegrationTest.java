@@ -18,24 +18,24 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AddressServicePreprodIntegrationTest {
+class AddressServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(AddressServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AddressServiceMainnetIntegrationTest.class);
 
     private AddressesService addressService;
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        addressService = BackendFactory.getMaestroPreprodService(apiKey).getAddressService();
+        addressService = BackendFactory.getMaestroMainnetService(apiKey).getAddressService();
     }
 
     @Test
     void getTransactionsByPaymentCredentialsTest() throws ApiException {
-        var paymentCredentials = List.of("addr_vkh1sm6z4np95c4exg5002eyns0t4q4y74xrjfk9xz7qqz3726yse3n");
+        var paymentCredentials = List.of("addr_shared_vkh1ewj7sycvy5y234m3uhudn5dggqk3djr0jheacr3utna5gcnmwp2");
 
         Result<PaginatedPaymentCredentialsTransaction> txHashesResult = addressService.getTransactionsByPaymentCredentials(paymentCredentials, Options.EMPTY);
         Assertions.assertTrue(txHashesResult.isSuccessful());
@@ -52,7 +52,7 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getUTxOsFromPaymentCredentialsTest() throws ApiException {
-        List<String> paymentCredentials = List.of("addr_vkh1sm6z4np95c4exg5002eyns0t4q4y74xrjfk9xz7qqz3726yse3n");
+        List<String> paymentCredentials = List.of("addr_shared_vkh1ewj7sycvy5y234m3uhudn5dggqk3djr0jheacr3utna5gcnmwp2");
         Result<PaginatedUtxoWithSlot> addressUTxOsResult = addressService.getUTxOsByPaymentCredentials(paymentCredentials, false, false, Options.EMPTY);
         Assertions.assertTrue(addressUTxOsResult.isSuccessful());
         Assertions.assertNotNull(addressUTxOsResult.getValue());
@@ -61,7 +61,7 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getBalancesByPaymentCredentialTest() throws ApiException {
-        String paymentCredential = "addr_vkh1sm6z4np95c4exg5002eyns0t4q4y74xrjfk9xz7qqz3726yse3n";
+        String paymentCredential = "addr_shared_vkh1ewj7sycvy5y234m3uhudn5dggqk3djr0jheacr3utna5gcnmwp2";
         Result<TimestampedBalance> addressBalanceResult = addressService.getBalanceByPaymentCredential(paymentCredential);
         Assertions.assertTrue(addressBalanceResult.isSuccessful());
         Assertions.assertNotNull(addressBalanceResult.getValue());
@@ -70,7 +70,7 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getTransactionsByPaymentCredentialTest() throws ApiException {
-        String paymentCredential = "addr_vkh1sm6z4np95c4exg5002eyns0t4q4y74xrjfk9xz7qqz3726yse3n";
+        String paymentCredential = "addr_shared_vkh1ewj7sycvy5y234m3uhudn5dggqk3djr0jheacr3utna5gcnmwp2";
         Result<PaginatedPaymentCredentialTransaction> transactionsResult = addressService.getTransactionsByPaymentCredential(paymentCredential, Options.EMPTY);
         Assertions.assertTrue(transactionsResult.isSuccessful());
         Assertions.assertNotNull(transactionsResult.getValue());
@@ -79,7 +79,8 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getUTxOsByPaymentCredentialTest() throws ApiException {
-        String paymentCredential = "addr_vkh1sm6z4np95c4exg5002eyns0t4q4y74xrjfk9xz7qqz3726yse3n";
+        //
+        String paymentCredential = "addr_shared_vkh1ewj7sycvy5y234m3uhudn5dggqk3djr0jheacr3utna5gcnmwp2";
         Result<PaginatedUtxoWithSlot> transactionsResult = addressService
                 .getUTxOsByPaymentCredential(paymentCredential,null,false,true, Options.EMPTY);
         Assertions.assertTrue(transactionsResult.isSuccessful());
@@ -89,7 +90,7 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getUTxOsByPaymentCredentialsTest() throws ApiException {
-        List<String> paymentCredentials = List.of("addr_vkh1sm6z4np95c4exg5002eyns0t4q4y74xrjfk9xz7qqz3726yse3n");
+        List<String> paymentCredentials = List.of("addr_shared_vkh1ewj7sycvy5y234m3uhudn5dggqk3djr0jheacr3utna5gcnmwp2");
         Result<PaginatedUtxoWithSlot> transactionsResult = addressService
                 .getUTxOsByPaymentCredentials(paymentCredentials,false,false, Options.EMPTY);
         Assertions.assertTrue(transactionsResult.isSuccessful());
@@ -99,7 +100,7 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void decodeAddressTest() throws ApiException { //Decode Address
-        String stakeAddress = "addr_test1qzr0g2kvyknzhyez3aatyjwpaw5z5n65cwfxc5ctcqq28ed3hcc035r9r76tkxehlr9wdla9twe02dpv843nru6czj6qycpamy";
+        String stakeAddress = "addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv";
         Result<AddressInfo> addressInfoResult = addressService
                 .decodeAddress(stakeAddress);
         Assertions.assertTrue(addressInfoResult.isSuccessful());
@@ -109,7 +110,7 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getAddressTransactionsTest() throws ApiException { //Decode Address
-        String stakeAddress = "addr_test1qzr0g2kvyknzhyez3aatyjwpaw5z5n65cwfxc5ctcqq28ed3hcc035r9r76tkxehlr9wdla9twe02dpv843nru6czj6qycpamy";
+        String stakeAddress = "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y";
         Result<PaginatedAddressTransaction> addressInfoResult = addressService
                 .getAddressTransactions(stakeAddress, Options.EMPTY);
         Assertions.assertTrue(addressInfoResult.isSuccessful());
@@ -119,7 +120,7 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getUTxOsRefBysAddressTest() throws ApiException { //Decode Address
-        String addressBech32 = "addr_test1qzr0g2kvyknzhyez3aatyjwpaw5z5n65cwfxc5ctcqq28ed3hcc035r9r76tkxehlr9wdla9twe02dpv843nru6czj6qycpamy";
+        String addressBech32 = "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y";
         Result<PaginatedUtxoRef> addressUTxORefs = addressService
                 .getUTxORefsByAddress(addressBech32, Options.EMPTY);
         Assertions.assertTrue(addressUTxORefs.isSuccessful());
@@ -129,7 +130,8 @@ class AddressServicePreprodIntegrationTest {
 
     @Test
     void getUTxOsBysAddressTest() throws ApiException { //Decode Address
-        List<String> addresses = List.of("addr_test1qzr0g2kvyknzhyez3aatyjwpaw5z5n65cwfxc5ctcqq28ed3hcc035r9r76tkxehlr9wdla9twe02dpv843nru6czj6qycpamy");
+        //addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y
+        List<String> addresses = List.of("addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y");
         Result<PaginatedUtxoWithSlot> addressUTxORefs = addressService
                 .getUTxOsByAddresses(addresses, false, false,Options.EMPTY);
         Assertions.assertTrue(addressUTxORefs.isSuccessful());

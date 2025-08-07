@@ -12,19 +12,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class BlockServicePreprodIntegrationTest {
+class BlockServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(BlockServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(BlockServiceMainnetIntegrationTest.class);
 
     private BlockService blockService;
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        blockService = BackendFactory.getMaestroPreprodService(apiKey).getBlockService();
+        blockService = BackendFactory.getMaestroMainnetService(apiKey).getBlockService();
     }
 
     @Test
@@ -38,7 +38,7 @@ class BlockServicePreprodIntegrationTest {
 
     @Test
     void getBlockInformationTest() throws ApiException {
-        var blockHashOrHeight = "20d17e4efe25eaa6bc92d7349abd33fc4a6866b6546db02844349bf0effaa66a";
+        var blockHashOrHeight = "f6192a1aaa6d3d05b4703891a6b66cd757801c61ace86cbe5ab0d66e07f601ab";
 
         Result<TimestampedBlockInfo> blockSummaryResult = blockService.getBlockInfo(blockHashOrHeight);
         Assertions.assertTrue(blockSummaryResult.isSuccessful());

@@ -15,20 +15,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class PoolServicePreprodIntegrationTest {
+class PoolServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(PoolServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(PoolServiceMainnetIntegrationTest.class);
 
     private PoolService poolService;
-    private final String testPoolId = "pool13la5erny3srx9u4fz9tujtl2490350f89r4w4qjhk0vdjmuv78v";
+    private final String poolId = "pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp";
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        poolService = BackendFactory.getMaestroPreprodService(apiKey).getPoolService();
+        poolService = BackendFactory.getMaestroMainnetService(apiKey).getPoolService();
     }
 
     @Test
@@ -41,7 +41,7 @@ class PoolServicePreprodIntegrationTest {
 
     @Test
     void getPoolBlocksTest() throws ApiException {
-        Result<PaginatedPoolBlock> poolBlocksResult = poolService.getPoolBlocks(testPoolId, Options.EMPTY);
+        Result<PaginatedPoolBlock> poolBlocksResult = poolService.getPoolBlocks(poolId, Options.EMPTY);
         assertTrue(poolBlocksResult.isSuccessful());
         assertNotNull(poolBlocksResult.getValue());
         log.info("getPoolBlocksTest: " + poolBlocksResult.getValue().toString());
@@ -49,7 +49,7 @@ class PoolServicePreprodIntegrationTest {
 
     @Test
     void getPoolDelegatorsTest() throws ApiException {
-        Result<PaginatedDelegatorInfo> poolDelegatorsResult = poolService.getPoolDelegators(testPoolId, Options.EMPTY);
+        Result<PaginatedDelegatorInfo> poolDelegatorsResult = poolService.getPoolDelegators(poolId, Options.EMPTY);
         assertTrue(poolDelegatorsResult.isSuccessful());
         assertNotNull(poolDelegatorsResult.getValue());
         log.info("getPoolDelegatorsTest: " + poolDelegatorsResult.getValue().toString());
@@ -57,16 +57,17 @@ class PoolServicePreprodIntegrationTest {
 
     @Test
     void getPoolDelegatorHistoryTest() throws ApiException {
-        int epochNo = 150;
-        Result<PaginatedHistoricalDelegatorInfo> delegatorHistoryResult = poolService.getPoolDelegatorHistory(testPoolId, epochNo, Options.EMPTY);
+        int epochNo = 257;
+        Result<PaginatedHistoricalDelegatorInfo> delegatorHistoryResult = poolService.getPoolDelegatorHistory(poolId, epochNo, Options.EMPTY);
         assertTrue(delegatorHistoryResult.isSuccessful());
         assertNotNull(delegatorHistoryResult.getValue());
         log.info("getPoolDelegatorHistoryTest: " + delegatorHistoryResult.getValue().toString());
+
     }
 
     @Test
     void getPoolHistoryTest() throws ApiException {
-        Result<PaginatedPoolHistory> poolHistoryResult = poolService.getPoolHistory(testPoolId, Options.EMPTY);
+        Result<PaginatedPoolHistory> poolHistoryResult = poolService.getPoolHistory(poolId, Options.EMPTY);
         assertTrue(poolHistoryResult.isSuccessful());
         assertNotNull(poolHistoryResult.getValue());
         log.info("getPoolHistoryTest: " + poolHistoryResult.getValue().toString());
@@ -74,7 +75,7 @@ class PoolServicePreprodIntegrationTest {
 
     @Test
     void getPoolInfoTest() throws ApiException {
-        Result<TimestampedPoolInfo> poolInfoResult = poolService.getPoolInfo(testPoolId);
+        Result<TimestampedPoolInfo> poolInfoResult = poolService.getPoolInfo(poolId);
         assertTrue(poolInfoResult.isSuccessful());
         assertNotNull(poolInfoResult.getValue());
         log.info("getPoolInfoTest: " + poolInfoResult.getValue().toString());
@@ -82,7 +83,7 @@ class PoolServicePreprodIntegrationTest {
 
     @Test
     void getPoolMetadataTest() throws ApiException {
-        Result<TimestampedPoolMetadata> poolMetadataResult = poolService.getPoolMetadata(testPoolId);
+        Result<TimestampedPoolMetadata> poolMetadataResult = poolService.getPoolMetadata(poolId);
         assertTrue(poolMetadataResult.isSuccessful());
         assertNotNull(poolMetadataResult.getValue());
         log.info("getPoolMetadataTest: " + poolMetadataResult.getValue().toString());
@@ -90,7 +91,7 @@ class PoolServicePreprodIntegrationTest {
 
     @Test
     void getPoolRelaysTest() throws ApiException {
-        Result<TimestampedPoolRelays> poolRelaysResult = poolService.getPoolRelays(testPoolId);
+        Result<TimestampedPoolRelays> poolRelaysResult = poolService.getPoolRelays(poolId);
         assertTrue(poolRelaysResult.isSuccessful());
         assertNotNull(poolRelaysResult.getValue());
         log.info("getPoolRelaysTest: " + poolRelaysResult.getValue().toString());
@@ -98,7 +99,7 @@ class PoolServicePreprodIntegrationTest {
 
     @Test
     void getPoolUpdatesTest() throws ApiException {
-        Result<TimestampedPoolUpdates> poolUpdatesResult = poolService.getPoolUpdates(testPoolId);
+        Result<TimestampedPoolUpdates> poolUpdatesResult = poolService.getPoolUpdates(poolId);
         assertTrue(poolUpdatesResult.isSuccessful());
         assertNotNull(poolUpdatesResult.getValue());
         log.info("getPoolUpdatesTest: " + poolUpdatesResult.getValue().toString());

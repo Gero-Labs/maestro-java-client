@@ -14,24 +14,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class PolicyServicePreprodIntegrationTest {
+class PolicyServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(PolicyServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(PolicyServiceMainnetIntegrationTest.class);
 
     private PolicyService policyService;
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        policyService = BackendFactory.getMaestroPreprodService(apiKey).getPolicyService();
+        policyService = BackendFactory.getMaestroMainnetService(apiKey).getPolicyService();
     }
 
     @Test
     void getPolicyAccountsTest() throws ApiException {
-        var policyID = "2c5fdca5caed1095d077cb23b49ccb170c3be4245915ec169c5c57a5";
+        var policyID = "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c6";
         Result<PaginatedPolicyHolderAccount> result = policyService.getPolicyAccounts(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
@@ -40,7 +40,7 @@ class PolicyServicePreprodIntegrationTest {
 
     @Test
     void getPolicyAddressesTest() throws ApiException {
-        var policyID = "2c5fdca5caed1095d077cb23b49ccb170c3be4245915ec169c5c57a5";
+        var policyID = "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c6";
         Result<PaginatedPolicyHolder> result = policyService.getPolicyAddresses(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
@@ -49,7 +49,7 @@ class PolicyServicePreprodIntegrationTest {
 
     @Test
     void getPolicyAssetsTest() throws ApiException {
-        var policyID = "2c5fdca5caed1095d077cb23b49ccb170c3be4245915ec169c5c57a5";
+        var policyID = "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c6";
         Result<PaginatedAssetInfoConcise> result = policyService.getPolicyAssets(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
@@ -58,7 +58,7 @@ class PolicyServicePreprodIntegrationTest {
 
     @Test
     void getPolicyInfoTest() throws ApiException {
-        var policyID = "2c5fdca5caed1095d077cb23b49ccb170c3be4245915ec169c5c57a5";
+        var policyID = "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c6";
         Result<TimestampedPolicyInfo> result = policyService.getPolicyInfo(policyID);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
@@ -67,7 +67,7 @@ class PolicyServicePreprodIntegrationTest {
 
     @Test
     void getPolicyMintsTest() throws ApiException {
-        var policyID = "2c5fdca5caed1095d077cb23b49ccb170c3be4245915ec169c5c57a5";
+        var policyID = "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c6";
         Result<PaginatedPolicyMintTransaction> result = policyService.getPolicyMints(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
@@ -76,7 +76,7 @@ class PolicyServicePreprodIntegrationTest {
 
     @Test
     void getPolicyTxsTest() throws ApiException {
-        var policyID = "2c5fdca5caed1095d077cb23b49ccb170c3be4245915ec169c5c57a5";
+        var policyID = "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c6";
         Result<PaginatedPolicyTransaction> result = policyService.getPolicyTxs(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());
@@ -85,7 +85,7 @@ class PolicyServicePreprodIntegrationTest {
 
     @Test
     void getPolicyUtxosTest() throws ApiException {
-        var policyID = "2c5fdca5caed1095d077cb23b49ccb170c3be4245915ec169c5c57a5";
+        var policyID = "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c6";
         Result<PaginatedPolicyUtxo> result = policyService.getPolicyUtxos(policyID, Options.EMPTY);
         Assertions.assertTrue(result.isSuccessful());
         Assertions.assertNotNull(result.getValue());

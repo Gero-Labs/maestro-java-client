@@ -13,28 +13,28 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AssetServicePreprodIntegrationTest {
+class AssetServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(AssetServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AssetServiceMainnetIntegrationTest.class);
 
     private AssetService assetsService;
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        assetsService = BackendFactory.getMaestroPreprodService(apiKey).getAssetService();
+        assetsService = BackendFactory.getMaestroMainnetService(apiKey).getAssetService();
     }
 
     @Test
     void getAssetInformationTest() throws ApiException {
-        var poliyID = "2190ed7899ceac9eb013f0f9912126ee20e9a5440d92fe6e28a8edc5";
-        var assetName = "Sr_1752478720485";
-        var assetNameHex = "53725f31373532343738373230343835";
-        var assetNameEncoded = "2190ed7899ceac9eb013f0f9912126ee20e9a5440d92fe6e28a8edc5.53725f31373532343738373230343835";
-        var asset = "2190ed7899ceac9eb013f0f9912126ee20e9a5440d92fe6e28a8edc553725f31373532343738373230343835";
+        var poliyID = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff";
+        var assetName = "DONTSPAM";
+        var assetNameHex = "444f4e545350414d";
+        var assetNameEncoded = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff.444f4e545350414d";
+        var asset = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff444f4e545350414d";
 
         Result<TimestampedAssetInfo> assetInfoResult = assetsService.getAssetInfo(asset);
         Assertions.assertTrue(assetInfoResult.isSuccessful());
@@ -44,11 +44,11 @@ class AssetServicePreprodIntegrationTest {
 
     @Test
     void getAssetAccountsTest() throws ApiException {
-        var poliyID = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
-        var assetName = "LUCY";
-        var assetNameHex = "4c554359";
-        var assetNameEncoded = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e4.4c554359";
-        var asset = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
+        var poliyID = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff";
+        var assetName = "DONTSPAM";
+        var assetNameHex = "444f4e545350414d";
+        var assetNameEncoded = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff.444f4e545350414d";
+        var asset = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff444f4e545350414d";
 
         Result<PaginatedAssetHolderAccount> assetInfoResult = assetsService.getAssetAccounts(asset, Options.EMPTY);
         Assertions.assertTrue(assetInfoResult.isSuccessful());
@@ -58,11 +58,11 @@ class AssetServicePreprodIntegrationTest {
 
     @Test
     void getAssetddressesTest() throws ApiException {
-        var poliyID = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
-        var assetName = "LUCY";
-        var assetNameHex = "4c554359";
-        var assetNameEncoded = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e4.4c554359";
-        var asset = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
+        var poliyID = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff";
+        var assetName = "DONTSPAM";
+        var assetNameHex = "444f4e545350414d";
+        var assetNameEncoded = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff.444f4e545350414d";
+        var asset = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff444f4e545350414d";
 
         Result<PaginatedAssetHolder> assetInfoResult = assetsService.getAssetAddresses(asset, Options.EMPTY);
         Assertions.assertTrue(assetInfoResult.isSuccessful());
@@ -72,11 +72,11 @@ class AssetServicePreprodIntegrationTest {
 
     @Test
     void getAssetMintsAndBurnsTest() throws ApiException {
-        var poliyID = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
-        var assetName = "LUCY";
-        var assetNameHex = "4c554359";
-        var assetNameEncoded = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e4.4c554359";
-        var asset = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
+        var poliyID = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff";
+        var assetName = "DONTSPAM";
+        var assetNameHex = "444f4e545350414d";
+        var assetNameEncoded = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff.444f4e545350414d";
+        var asset = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff444f4e545350414d";
 
         Result<PaginatedMintTransaction> assetMints = assetsService.getAssetMints(asset, Options.EMPTY);
         Assertions.assertTrue(assetMints.isSuccessful());
@@ -86,11 +86,11 @@ class AssetServicePreprodIntegrationTest {
 
     @Test
     void getAssetTransactionsTest() throws ApiException {
-        var poliyID = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
-        var assetName = "LUCY";
-        var assetNameHex = "4c554359";
-        var assetNameEncoded = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e4.4c554359";
-        var asset = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
+        var poliyID = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff";
+        var assetName = "DONTSPAM";
+        var assetNameHex = "444f4e545350414d";
+        var assetNameEncoded = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff.444f4e545350414d";
+        var asset = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff444f4e545350414d";
 
         Result<PaginatedTimestampedTransaction> assetMints = assetsService.getAssetTransactions(asset, Options.EMPTY);
         Assertions.assertTrue(assetMints.isSuccessful());
@@ -100,11 +100,11 @@ class AssetServicePreprodIntegrationTest {
 
     @Test
     void getAssetUTxOsTest() throws ApiException {
-        var poliyID = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
-        var assetName = "LUCY";
-        var assetNameHex = "4c554359";
-        var assetNameEncoded = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e4.4c554359";
-        var asset = "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359";
+        var poliyID = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff";
+        var assetName = "DONTSPAM";
+        var assetNameHex = "444f4e545350414d";
+        var assetNameEncoded = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff.444f4e545350414d";
+        var asset = "d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff444f4e545350414d";
 
         Result<PaginatedAssetUtxo> assetUtxos = assetsService.getAssetUtxos(asset, Options.EMPTY);
         Assertions.assertTrue(assetUtxos.isSuccessful());
