@@ -22,7 +22,7 @@
         <slf4j-reload4j.version>2.0.16</slf4j-reload4j.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <bcprov-jdk15to18.version>1.80</bcprov-jdk15to18.version>
-        <junit-jupiter.version>5.11.3</junit-jupiter.version>
+        <junit-jupiter.version>5.13.4</junit-jupiter.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
@@ -100,13 +100,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>5.13.0</version>
+            <version>5.18.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.13.0</version>
+            <version>5.18.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
