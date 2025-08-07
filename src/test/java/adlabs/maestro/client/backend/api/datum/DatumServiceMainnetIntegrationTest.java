@@ -15,24 +15,24 @@ import org.junit.jupiter.api.TestInstance;
 import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class DatumServicePreprodIntegrationTest {
+class DatumServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(DatumServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(DatumServiceMainnetIntegrationTest.class);
 
     private DatumService datumService;
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        datumService = BackendFactory.getMaestroPreprodService(apiKey).getDatumService();
+        datumService = BackendFactory.getMaestroMainnetService(apiKey).getDatumService();
     }
 
     @Test
     void getDatumByHashTest() throws ApiException {
-        var datumHash = "5571e2c3549f15934a38382d1318707a86751fb70827f4cbd29b104480f1be9b";
+        var datumHash = "818ee3db3bbbd04f9f2ce21778cac3ac605802a4fcb00c8b3a58ee2dafc17d46";
 
         Result<TimestampedDatum> datumByHashResult = datumService.getDatumByHash(datumHash);
         Assertions.assertTrue(datumByHashResult.isSuccessful());
@@ -42,7 +42,7 @@ class DatumServicePreprodIntegrationTest {
 
     @Test
     void getDatumsByHashesTest() throws ApiException {
-        var datumHashes = List.of("5571e2c3549f15934a38382d1318707a86751fb70827f4cbd29b104480f1be9b");
+        var datumHashes = List.of("818ee3db3bbbd04f9f2ce21778cac3ac605802a4fcb00c8b3a58ee2dafc17d46");
 
         Result<TimestampedDatumMap> datumByHashResult = datumService.getDatumsByHashes(datumHashes);
         Assertions.assertTrue(datumByHashResult.isSuccessful());

@@ -12,24 +12,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ScriptServicePreprodIntegrationTest {
+class ScriptServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(ScriptServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ScriptServiceMainnetIntegrationTest.class);
 
     private ScriptsService scriptsService;
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        scriptsService = BackendFactory.getMaestroPreprodService(apiKey).getScriptsService();
+        scriptsService = BackendFactory.getMaestroMainnetService(apiKey).getScriptsService();
     }
 
     @Test
     void getScriptInformationTest() throws ApiException {
-        String scriptHash = "a8e9f8f34fd631b1d5b9f41a90f4abc0d3935cea7baba0bb34c96f59";
+        String scriptHash = "d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8";
         Result<TimestampedScriptFirstSeen> scriptInformationResult = scriptsService.getScriptByHash(scriptHash);
         Assertions.assertTrue(scriptInformationResult.isSuccessful());
         Assertions.assertNotNull(scriptInformationResult.getValue());

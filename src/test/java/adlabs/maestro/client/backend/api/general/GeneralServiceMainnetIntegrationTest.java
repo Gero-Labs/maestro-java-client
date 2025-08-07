@@ -16,19 +16,19 @@ import org.junit.jupiter.api.TestInstance;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class GeneralServicePreprodIntegrationTest {
+class GeneralServiceMainnetIntegrationTest {
 
-    private static final Logger log = LoggerFactory.getLogger(GeneralServicePreprodIntegrationTest.class);
+    private static final Logger log = LoggerFactory.getLogger(GeneralServiceMainnetIntegrationTest.class);
 
     private GeneralService generalService;
 
     @BeforeAll
     public void setup() {
-        String apiKey = System.getenv("MAESTRO_PREPROD_API_KEY");
+        String apiKey = System.getenv("MAESTRO_API_KEY");
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalStateException("MAESTRO_PREPROD_API_KEY environment variable is not set. Please set it before running tests.");
+            throw new IllegalStateException("MAESTRO_API_KEY environment variable is not set. Please set it before running tests.");
         }
-        generalService = BackendFactory.getMaestroPreprodService(apiKey).getGeneralService();
+        generalService = BackendFactory.getMaestroMainnetService(apiKey).getGeneralService();
     }
 
 
