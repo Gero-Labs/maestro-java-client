@@ -29,7 +29,7 @@ jobs:
         run: |
           mvn test -Dtest="*Mainnet*" -Djacoco.destFile=exportJacoco/jacoco-mainnet.exec
       - name: Upload Jacoco Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: mainnet-tests-jacoco
           path: exportJacoco/jacoco-mainnet.exec
