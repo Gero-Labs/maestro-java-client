@@ -29,7 +29,7 @@ jobs:
         run: |
           mvn test -Dtest="*Preprod*" -Djacoco.destFile=exportJacoco/jacoco-preprod.exec
       - name: Upload Jacoco Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: preprod-tests-jacoco
           path: exportJacoco/jacoco-preprod.exec
