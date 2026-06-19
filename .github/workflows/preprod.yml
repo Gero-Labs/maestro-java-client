@@ -44,7 +44,7 @@ jobs:
           set -uo pipefail
           PATHS=( exportJacoco/jacoco-preprod.exec )
           EXIST=()
-          for p in "${PATHS[@]}"; do compgen -G "$p" >/dev/null 2>&1 && EXIST+=("$p"); done
+          for p in "${PATHS[@]}"; do for m in $p; do [ -e "$m" ] && EXIST+=("$m"); done; done
           if [ ${#EXIST[@]} -eq 0 ]; then echo "Nothing to push"; exit 0; fi
           tar czf jacoco-preprod.tgz "${EXIST[@]}"
           echo "$HARBOR_PASSWORD" | oras login "$HARBOR_REGISTRY" -u "$HARBOR_USERNAME" --password-stdin
