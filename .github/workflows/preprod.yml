@@ -28,9 +28,29 @@ jobs:
       - name: Run Integration Tests
         run: |
           mvn test -Dtest="*Preprod*" -Djacoco.destFile=exportJacoco/jacoco-preprod.exec
-      - name: Upload Jacoco Results
-        uses: actions/upload-artifact@v4
-        with:
-          name: preprod-tests-jacoco
-          path: exportJacoco/jacoco-preprod.exec
-        if: always()  # Upload even if tests fail
+      - name: Set up ORAS
+        if: always()
+        uses: oras-project/setup-oras@v2
+
+      - name: Push jacoco-preprod to Harbor
+        if: always()
+        continue-on-error: true   # never fail CI on artifact upload
+        env:
+          HARBOR_REGISTRY: ${{ secrets.HARBOR_REGISTRY }}
+          HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
+          HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          PATHS=( exportJacoco/jacoco-preprod.exec )
+          EXIST=()
+          for p in "${PATHS[@]}"; do for m in $p; do [ -e "$m" ] && EXIST+=("$m"); done; done
+          if [ ${#EXIST[@]} -eq 0 ]; then echo "Nothing to push"; exit 0; fi
+          tar czf jacoco-preprod.tgz "${EXIST[@]}"
+          echo "$HARBOR_PASSWORD" | oras login "$HARBOR_REGISTRY" -u "$HARBOR_USERNAME" --password-stdin
+          TAG="jacoco-preprod-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          oras push "$HARBOR_REGISTRY/gero/maestro-java-client-ci:${TAG}" \
+            --artifact-type application/vnd.gero.ci-artifact.v1+tar \
+            --annotation "run.url=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            jacoco-preprod.tgz:application/gzip
+          echo "Pushed $HARBOR_REGISTRY/gero/maestro-java-client-ci:${TAG}"
