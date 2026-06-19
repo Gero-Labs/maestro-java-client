@@ -46,11 +46,11 @@ jobs:
           EXIST=()
           for p in "${PATHS[@]}"; do compgen -G "$p" >/dev/null 2>&1 && EXIST+=("$p"); done
           if [ ${#EXIST[@]} -eq 0 ]; then echo "Nothing to push"; exit 0; fi
-          tar czf /tmp/jacoco-mainnet.tgz "${EXIST[@]}"
+          tar czf jacoco-mainnet.tgz "${EXIST[@]}"
           echo "$HARBOR_PASSWORD" | oras login "$HARBOR_REGISTRY" -u "$HARBOR_USERNAME" --password-stdin
           TAG="jacoco-mainnet-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           oras push "$HARBOR_REGISTRY/gero/maestro-java-client-ci:${TAG}" \
             --artifact-type application/vnd.gero.ci-artifact.v1+tar \
             --annotation "run.url=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
-            /tmp/jacoco-mainnet.tgz:application/gzip
+            jacoco-mainnet.tgz:application/gzip
           echo "Pushed $HARBOR_REGISTRY/gero/maestro-java-client-ci:${TAG}"
